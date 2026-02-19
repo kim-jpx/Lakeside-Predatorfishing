@@ -15,12 +15,14 @@
       --mist-grey: #F2F5F4;
       --warm-rope: #C8A96A;
       --charcoal: #2A2E2F;
-      --space-2xs: 0.2rem;
+      --space-2xs: 0.25rem;
       --space-xs: 0.4rem;
       --space-sm: 0.65rem;
       --space-md: 1rem;
       --space-lg: 1.5rem;
       --space-xl: 2rem;
+      --space-2xl: 3rem;
+      --space-3xl: 4.5rem;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,6 +58,7 @@
     .landing {
       position: relative; width: 100%; height: 100vh;
       display: flex; align-items: center; justify-content: center;
+      padding-bottom: 60px;
       overflow: hidden; opacity: 0; transition: opacity 1.5s ease;
     }
     .landing.visible { opacity: 1; }
@@ -103,15 +106,15 @@
        ============================================ */
     .landing-content {
       position: relative; z-index: 2; text-align: center;
-      padding: var(--space-xs) 1.85rem var(--space-2xs);
+      padding: var(--space-lg) var(--space-xl);
       display: flex; flex-direction: column; align-items: center;
-      gap: 1.12rem; max-width: 660px;
+      gap: var(--space-xs); max-width: 660px;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .top-company-name {
       position: absolute;
-      top: 1.15rem;
+      top: 1rem;
       left: 50%;
       transform: translateX(calc(-50% + 60px));
       z-index: 3;
@@ -162,11 +165,11 @@
     /* Typography */
     h1 {
       font-family: 'Teko', sans-serif;
-      font-size: clamp(1.75rem, 4.8vw, 3rem);
+      font-size: clamp(1.6rem, 4vw, 2.75rem);
       color: #fff; font-weight: 500; letter-spacing: 0.02em; line-height: 1.1;
     }
     .tagline {
-      font-size: clamp(0.65rem, 1.3vw, 0.85rem);
+      font-size: clamp(0.75rem, 1.3vw, 0.88rem);
       color: var(--warm-rope); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
     }
     .kinetic-title .word, .tagline .word {
@@ -194,7 +197,7 @@
     .divider {
       width: 60px; height: 2px; background: var(--warm-rope); border: none;
       opacity: 0; animation: fadeUp 1s ease forwards; animation-delay: 1.1s;
-      margin: 0.45rem 0;
+      margin: 0.25rem auto;
     }
     .divider.breathing { animation: fadeUp 1s ease forwards, breathe 4s ease-in-out 2.5s infinite; }
     @keyframes breathe {
@@ -206,29 +209,20 @@
     .content-area {
       position: relative;
       min-height: 80px;
-      max-width: 480px;
+      max-width: 520px;
       width: 100%;
-      padding: 0 0.2rem;
+      padding: 0 var(--space-md);
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.4s;
       overflow: hidden;
     }
 
     .content-slide {
-      color: rgba(242,245,244,0.6); font-size: 0.82rem; line-height: 1.65;
+      color: rgba(242,245,244,0.6); font-size: 0.88rem; line-height: 1.65;
       transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, filter 0.4s ease;
     }
 
-    /* Collapse/expand (default <-> trip) */
-    .content-slide.collapse-out {
-      transform: scale(0); opacity: 0; filter: blur(6px);
-      position: absolute; top: 0; left: 0; right: 0;
-    }
-    .content-slide.expand-in {
-      transform: scale(0); opacity: 0; filter: blur(6px);
-    }
-
-    /* Slide (trip <-> trip) */
+    /* Slide */
     .content-slide.exit-left {
       transform: translateX(-110%); opacity: 0;
       position: absolute; top: 0; left: 0; right: 0;
@@ -245,23 +239,10 @@
       display: none;
     }
 
-    /* Collapsible zone elements (collapse class for default<->trip) */
-    .divider.collapse,
-    .content-area.collapse,
-    .cta-row.collapse {
-      transform: scale(0) !important; opacity: 0 !important;
-      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease !important;
-    }
-    .divider.uncollapse,
-    .content-area.uncollapse,
-    .cta-row.uncollapse {
-      transition: transform 0.65s cubic-bezier(0.16,1,0.3,1), opacity 0.55s ease !important;
-    }
-
     /* Tour detail inline styles */
     .tour-detail .detail-chips {
       display: flex; gap: 1.2rem; justify-content: center;
-      margin: 0.7rem 0;
+      margin: var(--space-md) 0;
     }
     .tour-detail .chip {
       text-align: center;
@@ -273,7 +254,7 @@
       display: block;
     }
     .tour-detail .chip-label {
-      font-size: 0.58rem; color: rgba(242,245,244,0.4);
+      font-size: 0.62rem; color: rgba(242,245,244,0.4);
       text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.1rem;
       display: block;
     }
@@ -290,15 +271,7 @@
       transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, filter 0.35s ease;
     }
 
-    /* Collapse mode (default <-> trip) */
-    .kinetic-title.swap-out, .tagline.swap-out {
-      transform: scale(0); opacity: 0; filter: blur(8px);
-    }
-    .kinetic-title.swap-in, .tagline.swap-in {
-      transform: scale(0); opacity: 0; filter: blur(8px);
-    }
-
-    /* Slide mode (trip <-> trip) */
+    /* Slide mode */
     .kinetic-title.slide-out, .tagline.slide-out {
       transform: translateX(-60px); opacity: 0;
     }
@@ -310,18 +283,18 @@
        SERVICE ITEMS — clickable, trigger panels
        ============================================ */
     .services-row {
-      display: flex; gap: 2.5rem; justify-content: center;
+      display: flex; gap: 2rem; justify-content: center;
       align-items: flex-start;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 2s;
-      margin-top: 0.75rem;
+      margin-top: var(--space-sm);
     }
 
     .service-item {
       text-align: center; color: rgba(242,245,244,0.5);
       cursor: pointer; transition: all 0.3s; position: relative;
       padding: 0.62rem 0.58rem;
-      min-width: 100px;
+      min-width: 110px;
       display: flex; flex-direction: column; align-items: center;
     }
     .service-item:hover { color: var(--warm-rope); transform: translateY(-3px); }
@@ -341,30 +314,30 @@
     .service-item[data-panel="lessons"] .icon svg { transform: translateY(-0.8px); }
     .service-item span {
       display: block; font-weight: 500; letter-spacing: 0.08em;
-      text-transform: uppercase; font-size: 0.65rem;
+      text-transform: uppercase; font-size: 0.72rem;
       line-height: 1.15;
     }
-    .service-item > span:first-of-type { margin-top: 0.38rem; }
+    .service-item > span:first-of-type { margin-top: 0.4rem; }
     .service-item .explore-hint {
-      display: block; font-size: 0.5rem; color: rgba(242,245,244,0.3);
-      letter-spacing: 0.05em; margin-top: 0.22rem; text-transform: none;
+      display: block; font-size: 0.58rem; color: rgba(242,245,244,0.3);
+      letter-spacing: 0.05em; margin-top: 0.3rem; text-transform: none;
       transition: color 0.3s;
     }
     .service-item:hover .explore-hint { color: rgba(200,169,106,0.6); }
 
     /* CTA */
     .cta-row {
-      display: flex; gap: 1.1rem; margin-top: 0.8rem;
+      display: flex; gap: 1.1rem; margin-top: var(--space-xs);
       justify-content: center; align-items: center;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.8s;
     }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
-      min-width: 140px; height: 40px; padding: 0 1.5rem;
+      min-width: 150px; height: 42px; padding: 0 1.5rem;
       border-radius: 4px; box-sizing: border-box; border: 1.5px solid transparent;
       line-height: 1;
-      text-decoration: none; font-weight: 600; font-size: 0.78rem;
+      text-decoration: none; font-weight: 600; font-size: 0.8rem;
       transition: all 0.3s; letter-spacing: 0.03em;
     }
     .btn-primary { background: var(--warm-rope); color: var(--fjord-blue); }
@@ -388,7 +361,7 @@
     .bottom-bar {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2.2rem;
+      padding: 1.25rem 2.2rem;
       background: rgba(31,58,68,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       opacity: 0; animation: fadeUp 1s ease forwards; animation-delay: 2.2s;
       transition: opacity 0.4s ease;
@@ -408,31 +381,57 @@
     /* ============================================
        RESPONSIVE
        ============================================ */
+    @media (max-width: 900px) {
+      .landing-content { gap: var(--space-xs); padding: var(--space-md) var(--space-lg); max-width: 620px; }
+      h1 { font-size: clamp(1.5rem, 3.6vw, 2.35rem); }
+      .tagline { font-size: clamp(0.74rem, 1.4vw, 0.84rem); }
+      .content-area { max-width: 500px; }
+      .content-slide { font-size: 0.85rem; }
+      .services-row { gap: 1.5rem; margin-top: var(--space-sm); }
+      .service-item { min-width: 104px; }
+      .cta-row { gap: 0.9rem; margin-top: var(--space-xs); }
+      .btn { min-width: 140px; height: 42px; padding: 0 1.3rem; font-size: 0.79rem; }
+      .bottom-bar { padding: 1.1rem 1.8rem; }
+    }
+
     @media (max-width: 600px) {
-      .top-company-name { top: 0.7rem; width: 48px; height: 48px; }
-      .landing-content { gap: 0.82rem; padding: 0.28rem 1.1rem 0.2rem; }
+      .top-company-name { top: 0.75rem; width: 48px; height: 48px; }
+      .landing-content { gap: var(--space-xs); padding: var(--space-md) var(--space-lg); }
       .logo { width: 80px; height: 80px; margin-bottom: 0.15rem; }
-      .divider { margin: 0.28rem 0; }
-      .content-area { min-height: 74px; padding: 0 0.16rem; }
-      .content-slide { font-size: 0.75rem; padding: 0 0.3rem; }
-      .services-row { gap: 1.45rem; margin-top: 0.35rem; }
-      .service-item { min-width: 80px; padding: 0.46rem 0.35rem; }
+      .divider { margin: 0.25rem auto; }
+      .content-area { min-height: 74px; padding: 0 var(--space-md); }
+      .content-slide { font-size: 0.8rem; padding: 0 0.24rem; }
+      .services-row { gap: 1rem; margin-top: var(--space-sm); }
+      .service-item { min-width: 84px; padding: 0.46rem 0.35rem; }
       .service-item .icon svg { width: 20px; height: 20px; }
       .service-item .icon { width: 20px; height: 20px; }
-      .service-item > span:first-of-type { margin-top: 0.28rem; }
-      .service-item span { font-size: 0.55rem; }
-      .service-item .explore-hint { margin-top: 0.16rem; font-size: 0.45rem; }
-      .cta-row { flex-direction: column; align-items: center; gap: 0.55rem; margin-top: 0.45rem; }
-      .btn { min-width: 160px; height: 38px; font-size: 0.75rem; }
-      .bottom-bar { flex-direction: column; gap: 0.45rem; text-align: center; padding: 0.75rem 1.35rem; }
-      .bottom-bar .contact-info { flex-direction: column; gap: 0.24rem; font-size: 0.72rem; }
-      .bottom-bar .copyright { font-size: 0.62rem; }
+      .service-item > span:first-of-type { margin-top: 0.4rem; }
+      .service-item span { font-size: 0.62rem; }
+      .service-item .explore-hint { margin-top: 0.3rem; font-size: 0.52rem; }
+      .cta-row {
+        flex-direction: column; align-items: stretch; gap: 0.75rem;
+        margin-top: var(--space-xs); width: 100%; max-width: 360px;
+      }
+      .btn { width: 100%; min-width: 0; height: 42px; font-size: 0.78rem; }
+      .bottom-bar { flex-direction: column; gap: 0.45rem; text-align: center; padding: 1rem 1.5rem; }
+      .bottom-bar .contact-info { flex-direction: column; gap: 0.5rem; font-size: 0.72rem; }
+      .bottom-bar .copyright { font-size: 0.65rem; }
       .aurora-overlay { animation-duration: 30s; }
-      .tour-detail .detail-chips { gap: 0.9rem; margin: 0.62rem 0; }
+      .tour-detail .detail-chips { gap: 0.9rem; margin: var(--space-md) 0; }
       .tour-detail .chip { padding: 0 0.6rem; }
       .tour-detail .chip-value { font-size: 0.85rem; }
-      .tour-detail .chip-label { font-size: 0.52rem; }
+      .tour-detail .chip-label { font-size: 0.56rem; }
       .tour-detail p { margin-top: 0.35rem; }
+    }
+
+    @media (max-width: 380px) {
+      .landing-content { padding: var(--space-md); gap: var(--space-2xs); }
+      h1 { font-size: clamp(1.35rem, 8.5vw, 1.7rem); }
+      .tagline { font-size: clamp(0.72rem, 3.2vw, 0.8rem); }
+      .services-row { gap: 0.75rem; }
+      .service-item { min-width: 72px; padding: 0.42rem 0.24rem; }
+      .service-item .icon,
+      .service-item .icon svg { width: 18px; height: 18px; }
     }
 
     /* ============================================
@@ -579,14 +578,27 @@
     if (gif && gif.tagName === 'VIDEO') {
       gif.muted = true;
       const tryPlayIntro = () => {
-        const playPromise = gif.play();
-        if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+        if (gif.paused) {
+          const p = gif.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+        }
       };
       if (gif.readyState >= 2) tryPlayIntro();
-      else gif.addEventListener('canplay', tryPlayIntro, { once: true });
+      else {
+        gif.addEventListener('canplay', tryPlayIntro, { once: true });
+        gif.addEventListener('loadeddata', tryPlayIntro, { once: true });
+      }
       document.addEventListener('visibilitychange', () => {
         if (!document.hidden && !overlay.classList.contains('fade-out')) tryPlayIntro();
       });
+      // Last resort: play on first user interaction if autoplay was blocked
+      const playOnInteraction = () => {
+        tryPlayIntro();
+        document.removeEventListener('click', playOnInteraction);
+        document.removeEventListener('touchstart', playOnInteraction);
+      };
+      document.addEventListener('click', playOnInteraction, { once: true });
+      document.addEventListener('touchstart', playOnInteraction, { once: true });
     }
 
     /* Intro */
@@ -634,7 +646,6 @@
     const defaultTagline = "It's Always A Bigger Fish";
     let activeSlideId = 'content-default';
     let isAnimating = false;
-    let isDefaultView = true;
 
     function buildWords(text) {
       if (!text || !text.trim()) return '';
@@ -646,51 +657,7 @@
       topCompanyNameEl.classList.toggle('visible', targetId !== 'content-default');
     }
 
-    /* ---- COLLAPSE transition (default <-> trip) ---- */
-    function collapseZone(callback) {
-      // Collapse title, tagline, divider, content area, CTA
-      titleEl.classList.add('swap-out');
-      taglineEl.classList.add('swap-out');
-      dividerEl.classList.add('collapse');
-      contentArea.classList.add('collapse');
-      ctaRow.classList.add('collapse');
-
-      setTimeout(callback, 600);
-    }
-
-    function expandZone(titleText, taglineText) {
-      // Update text
-      titleEl.innerHTML = buildWords(titleText);
-      taglineEl.innerHTML = buildWords(taglineText);
-
-      // Remove collapse, add uncollapse for smooth expand
-      titleEl.classList.remove('swap-out');
-      taglineEl.classList.remove('swap-out');
-
-      titleEl.classList.add('swap-in');
-      taglineEl.classList.add('swap-in');
-      titleEl.offsetHeight;
-      requestAnimationFrame(() => {
-        titleEl.classList.remove('swap-in');
-        taglineEl.classList.remove('swap-in');
-      });
-
-      dividerEl.classList.remove('collapse');
-      dividerEl.classList.add('uncollapse');
-      contentArea.classList.remove('collapse');
-      contentArea.classList.add('uncollapse');
-      ctaRow.classList.remove('collapse');
-      ctaRow.classList.add('uncollapse');
-
-      // Clean up uncollapse classes after transition
-      setTimeout(() => {
-        dividerEl.classList.remove('uncollapse');
-        contentArea.classList.remove('uncollapse');
-        ctaRow.classList.remove('uncollapse');
-      }, 700);
-    }
-
-    /* ---- SLIDE transition (trip <-> trip) ---- */
+    /* ---- SLIDE transition ---- */
     function slideSwapElement(el, newText) {
       el.classList.add('slide-out');
       setTimeout(() => {
@@ -709,60 +676,33 @@
 
       const currentSlide = document.getElementById(activeSlideId);
       const newSlide = document.getElementById(newId);
-      const goingToDefault = newId === 'content-default';
-      const leavingDefault = activeSlideId === 'content-default';
 
-      if (leavingDefault || goingToDefault) {
-        // COLLAPSE mode: default <-> trip
-        collapseZone(() => {
-          // Swap content slides
-          currentSlide.classList.remove('active');
-          currentSlide.classList.add('hidden');
+      // Slide title & tagline
+      slideSwapElement(titleEl, titleText);
+      slideSwapElement(taglineEl, taglineText);
 
-          newSlide.classList.remove('hidden');
-          newSlide.classList.add('expand-in');
-          newSlide.offsetHeight;
-          requestAnimationFrame(() => {
-            newSlide.classList.remove('expand-in');
-            newSlide.classList.add('active');
-          });
+      // Slide content
+      currentSlide.classList.remove('active');
+      currentSlide.classList.add('exit-left');
 
-          // Expand everything back
-          expandZone(titleText, taglineText);
-          updateTopCompanyName(newId);
+      newSlide.classList.remove('hidden');
+      newSlide.classList.add('enter-from-right');
+      newSlide.offsetHeight;
 
-          setTimeout(() => {
-            activeSlideId = newId;
-            isDefaultView = goingToDefault;
-            updateTopCompanyName();
-            isAnimating = false;
-          }, 700);
-        });
-      } else {
-        // SLIDE mode: trip <-> trip
-        slideSwapElement(titleEl, titleText);
-        slideSwapElement(taglineEl, taglineText);
+      requestAnimationFrame(() => {
+        newSlide.classList.remove('enter-from-right');
+        newSlide.classList.add('active');
+      });
 
-        currentSlide.classList.remove('active');
-        currentSlide.classList.add('exit-left');
+      updateTopCompanyName(newId);
 
-        newSlide.classList.remove('hidden');
-        newSlide.classList.add('enter-from-right');
-        newSlide.offsetHeight;
-
-        requestAnimationFrame(() => {
-          newSlide.classList.remove('enter-from-right');
-          newSlide.classList.add('active');
-        });
-
-        setTimeout(() => {
-          currentSlide.classList.remove('exit-left');
-          currentSlide.classList.add('hidden');
-          activeSlideId = newId;
-          updateTopCompanyName();
-          isAnimating = false;
-        }, 460);
-      }
+      setTimeout(() => {
+        currentSlide.classList.remove('exit-left');
+        currentSlide.classList.add('hidden');
+        activeSlideId = newId;
+        updateTopCompanyName();
+        isAnimating = false;
+      }, 460);
     }
 
     updateTopCompanyName();
