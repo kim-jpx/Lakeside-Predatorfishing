@@ -108,7 +108,7 @@
       position: relative; z-index: 2; text-align: center;
       padding: var(--space-lg) var(--space-xl);
       display: flex; flex-direction: column; align-items: center;
-      gap: var(--space-xs); max-width: 660px;
+      gap: var(--space-sm); max-width: 760px;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
@@ -116,18 +116,17 @@
       position: absolute;
       top: 1rem;
       left: 50%;
-      transform: translateX(calc(-50% + 60px));
+      transform: translateX(-50%);
       z-index: 3;
-      width: 60px; height: 60px;
+      width: 52px; height: 52px;
       display: inline-flex; align-items: center; justify-content: center;
       background: none; border: none; padding: 0;
       pointer-events: none; cursor: pointer;
       opacity: 0;
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+      transition: opacity 0.3s ease;
     }
     .top-company-name.visible {
       opacity: 1;
-      transform: translateX(-50%);
       pointer-events: auto;
     }
     .top-company-name img {
@@ -146,20 +145,41 @@
       transform: translateY(-1px);
     }
 
-    /* Logo */
-    .logo {
-      display: none;
-      width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
-      border: 3px solid rgba(200,169,106,0.4);
-      opacity: 0; transform: translateY(20px);
-      animation: fadeUp 1s ease forwards; animation-delay: 0.3s;
-      transition: box-shadow 0.5s ease, border-color 0.5s ease;
-      cursor: pointer;
-      margin-bottom: 0.3rem;
+    .language-switcher {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      z-index: 3;
+      display: inline-flex;
+      gap: 0.15rem;
+      padding: 0.15rem;
+      border-radius: 999px;
+      border: 1px solid rgba(242,245,244,0.28);
+      background: rgba(10,16,21,0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    .logo:hover {
-      border-color: rgba(200,169,106,0.7);
-      box-shadow: 0 0 30px rgba(200,169,106,0.2), 0 0 60px rgba(200,169,106,0.1);
+    .lang-btn {
+      min-width: 38px;
+      height: 30px;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: rgba(242,245,244,0.75);
+      font-family: 'Exo 2', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+    }
+    .lang-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+    }
+    .lang-btn.active {
+      background: var(--warm-rope);
+      color: var(--fjord-blue);
+      font-weight: 600;
     }
 
     /* Typography */
@@ -167,6 +187,26 @@
       font-family: 'Teko', sans-serif;
       font-size: clamp(1.6rem, 4vw, 2.75rem);
       color: #fff; font-weight: 500; letter-spacing: 0.02em; line-height: 1.1;
+    }
+    .kinetic-title {
+      width: min(100%, 720px);
+      min-height: clamp(72px, 11vw, 108px);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .arched-title-svg {
+      display: block;
+      width: min(100%, 700px);
+      height: clamp(92px, 13vw, 126px);
+      overflow: visible;
+    }
+    .arched-title-text {
+      font-family: 'Teko', sans-serif;
+      font-size: 74px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      fill: #fff;
     }
     .tagline {
       font-size: clamp(0.75rem, 1.3vw, 0.88rem);
@@ -187,6 +227,7 @@
     .tagline .word:nth-child(3) { animation-delay: 1.2s; }
     .tagline .word:nth-child(4) { animation-delay: 1.3s; }
     .tagline .word:nth-child(5) { animation-delay: 1.4s; }
+    .tagline .word:nth-child(6) { animation-delay: 1.5s; }
 
     @keyframes wordReveal {
       0% { opacity: 0; transform: translateY(25px); filter: blur(8px); }
@@ -197,7 +238,7 @@
     .divider {
       width: 60px; height: 2px; background: var(--warm-rope); border: none;
       opacity: 0; animation: fadeUp 1s ease forwards; animation-delay: 1.1s;
-      margin: 0.25rem auto;
+      margin: 0.35rem auto;
     }
     .divider.breathing { animation: fadeUp 1s ease forwards, breathe 4s ease-in-out 2.5s infinite; }
     @keyframes breathe {
@@ -209,9 +250,9 @@
     .content-area {
       position: relative;
       min-height: 80px;
-      max-width: 520px;
+      max-width: 540px;
       width: 100%;
-      padding: 0 var(--space-md);
+      padding: 0 var(--space-lg);
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.4s;
       overflow: hidden;
@@ -246,7 +287,9 @@
     }
     .tour-detail .chip {
       text-align: center;
-      padding: 0 0.9rem;
+      padding: 0 0.5rem;
+      flex: 1;
+      min-width: 0;
     }
     .tour-detail .chip-value {
       font-family: 'Teko', sans-serif;
@@ -287,7 +330,7 @@
       align-items: flex-start;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 2s;
-      margin-top: var(--space-sm);
+      margin-top: var(--space-md);
     }
 
     .service-item {
@@ -327,7 +370,7 @@
 
     /* CTA */
     .cta-row {
-      display: flex; gap: 1.1rem; margin-top: var(--space-xs);
+      display: flex; gap: 1.1rem; margin-top: var(--space-sm);
       justify-content: center; align-items: center;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.8s;
@@ -382,26 +425,31 @@
        RESPONSIVE
        ============================================ */
     @media (max-width: 900px) {
-      .landing-content { gap: var(--space-xs); padding: var(--space-md) var(--space-lg); max-width: 620px; }
+      .landing-content { gap: var(--space-sm); padding: var(--space-md) var(--space-lg); max-width: 700px; }
       h1 { font-size: clamp(1.5rem, 3.6vw, 2.35rem); }
       .tagline { font-size: clamp(0.74rem, 1.4vw, 0.84rem); }
       .content-area { max-width: 500px; }
       .content-slide { font-size: 0.85rem; }
       .services-row { gap: 1.5rem; margin-top: var(--space-sm); }
       .service-item { min-width: 104px; }
-      .cta-row { gap: 0.9rem; margin-top: var(--space-xs); }
+      .cta-row { gap: 0.9rem; margin-top: var(--space-sm); }
       .btn { min-width: 140px; height: 42px; padding: 0 1.3rem; font-size: 0.79rem; }
       .bottom-bar { padding: 1.1rem 1.8rem; }
     }
 
     @media (max-width: 600px) {
-      .top-company-name { top: 0.75rem; width: 48px; height: 48px; }
+      .top-company-name { top: 0.75rem; width: 42px; height: 42px; }
+      .language-switcher { top: 0.7rem; right: 0.7rem; }
+      .lang-btn { min-width: 34px; height: 28px; font-size: 0.62rem; }
       .landing-content { gap: var(--space-xs); padding: var(--space-md) var(--space-lg); }
-      .logo { width: 80px; height: 80px; margin-bottom: 0.15rem; }
-      .divider { margin: 0.25rem auto; }
+      .kinetic-title { width: 100%; min-height: 76px; }
+      .arched-title-svg { width: 100%; height: 92px; }
+      .arched-title-text { font-size: 56px; }
+      .divider { margin: 0.3rem auto; }
       .content-area { min-height: 74px; padding: 0 var(--space-md); }
       .content-slide { font-size: 0.8rem; padding: 0 0.24rem; }
       .services-row { gap: 1rem; margin-top: var(--space-sm); }
+      .cta-row { margin-top: var(--space-xs); }
       .service-item { min-width: 84px; padding: 0.46rem 0.35rem; }
       .service-item .icon svg { width: 20px; height: 20px; }
       .service-item .icon { width: 20px; height: 20px; }
@@ -410,7 +458,7 @@
       .service-item .explore-hint { margin-top: 0.3rem; font-size: 0.52rem; }
       .cta-row {
         flex-direction: column; align-items: stretch; gap: 0.75rem;
-        margin-top: var(--space-xs); width: 100%; max-width: 360px;
+        margin-top: var(--space-sm); width: 100%; max-width: 360px;
       }
       .btn { width: 100%; min-width: 0; height: 42px; font-size: 0.78rem; }
       .bottom-bar { flex-direction: column; gap: 0.45rem; text-align: center; padding: 1rem 1.5rem; }
@@ -418,7 +466,7 @@
       .bottom-bar .copyright { font-size: 0.65rem; }
       .aurora-overlay { animation-duration: 30s; }
       .tour-detail .detail-chips { gap: 0.9rem; margin: var(--space-md) 0; }
-      .tour-detail .chip { padding: 0 0.6rem; }
+      .tour-detail .chip { padding: 0 0.3rem; }
       .tour-detail .chip-value { font-size: 0.85rem; }
       .tour-detail .chip-label { font-size: 0.56rem; }
       .tour-detail p { margin-top: 0.35rem; }
@@ -427,6 +475,7 @@
     @media (max-width: 380px) {
       .landing-content { padding: var(--space-md); gap: var(--space-2xs); }
       h1 { font-size: clamp(1.35rem, 8.5vw, 1.7rem); }
+      .arched-title-text { font-size: 48px; }
       .tagline { font-size: clamp(0.72rem, 3.2vw, 0.8rem); }
       .services-row { gap: 0.75rem; }
       .service-item { min-width: 72px; padding: 0.42rem 0.24rem; }
@@ -440,9 +489,10 @@
     @media (prefers-reduced-motion: reduce) {
       .aurora-overlay { animation: none; opacity: 0.7; }
       .kinetic-title .word, .tagline .word { animation: none; opacity: 1; transform: none; filter: none; }
-      .logo, .divider, .content-area, .services-row, .cta-row, .bottom-bar {
+      .divider, .content-area, .services-row, .cta-row, .bottom-bar {
         animation: none; opacity: 1; transform: none;
       }
+      .lang-btn { transition: none; }
       .divider.breathing { animation: none; }
       #intro-gif, #intro-overlay, .landing { transition: none; }
       .content-slide { transition: none; }
@@ -473,13 +523,21 @@
     <button class="top-company-name" aria-label="Back to main page">
       <img src="Lakeside Predatorfishing_logo.jpg" alt="Lakeside Predatorfishing logo">
     </button>
+    <div class="language-switcher" role="group" aria-label="Language selector">
+      <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" class="lang-btn" data-lang="sv" aria-pressed="false">SV</button>
+    </div>
 
     <div class="landing-content">
-      <img src="Lakeside Predatorfishing_logo.jpg" alt="Lakeside Predatorfishing" class="logo">
-
       <h1 class="kinetic-title" aria-label="Lakeside Predatorfishing">
-        <span class="word">Lakeside</span>
-        <span class="word">Predatorfishing</span>
+        <svg class="arched-title-svg" viewBox="0 0 700 240" role="presentation" aria-hidden="true">
+          <defs>
+            <path id="main-title-arc" d="M 18 202 Q 350 32 682 202"></path>
+          </defs>
+          <text class="arched-title-text">
+            <textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">LakesidePredatorfishing</textPath>
+          </text>
+        </svg>
       </h1>
 
       <p class="tagline" aria-label="It's Always A Bigger Fish">
@@ -642,13 +700,174 @@
     const contentArea = document.querySelector('.content-area');
     const ctaRow = document.querySelector('.cta-row');
     const topCompanyNameEl = document.querySelector('.top-company-name');
+    const languageSwitcherEl = document.querySelector('.language-switcher');
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const pageTitleEl = document.querySelector('title');
+    const metaDescriptionEl = document.querySelector('meta[name="description"]');
+    const callBtnEl = document.querySelector('.btn-primary');
+    const emailBtnEl = document.querySelector('.btn-outline');
+    const locationEl = document.querySelector('.contact-info span');
+    const defaultSlideEl = document.getElementById('content-default');
+    const guidedSlideEl = document.getElementById('content-guided');
+    const bookingSlideEl = document.getElementById('content-booking');
+    const lessonsSlideEl = document.getElementById('content-lessons');
     const defaultTitle = 'Lakeside Predatorfishing';
-    const defaultTagline = "It's Always A Bigger Fish";
+    const translations = {
+      en: {
+        htmlLang: 'en',
+        pageTitle: 'Lakeside Predatorfishing — Lake Fishing in Norway',
+        description: 'Pike and perch fishing in Northern Norway & northern Sweden. Predator fishing in waters that few or no one has fished in before. Contact Asgeir & Ola.',
+        skipLabel: 'Skip Intro',
+        languageSelectorAria: 'Language selector',
+        backToMainAria: 'Back to main page',
+        location: 'Karasjok, Norway',
+        defaultTagline: "It's Always A Bigger Fish",
+        ctaCall: 'Call Us',
+        ctaEmail: 'Email Us',
+        slides: {
+          default: 'Pike and perch fishing in Northern Norway &amp; northern Sweden. If you\'re keen on predator fishing in waters that few or no one has fished in before, we\'re the guys you should contact &mdash; Asgeir &amp; Ola.',
+          guided: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">Pike</span><span class="chip-label">Species</span></div><div class="chip"><span class="chip-value">Perch</span><span class="chip-label">Species</span></div><div class="chip"><span class="chip-value">1 Day</span><span class="chip-label">Duration</span></div></div><p>Includes boat, gear, and local guide support on remote lakes. Ideal for visitors who want a focused, high-quality day on the water.</p></div>',
+          booking: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">1-6</span><span class="chip-label">Party Size</span></div><div class="chip"><span class="chip-value">Flexible</span><span class="chip-label">Planning</span></div><div class="chip"><span class="chip-value">Custom</span><span class="chip-label">Setup</span></div></div><p>Choose your pace, preferred waters, and trip style. Best for families, friends, and small teams wanting a personal experience.</p></div>',
+          lessons: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">Spring</span><span class="chip-label">Option</span></div><div class="chip"><span class="chip-value">Summer</span><span class="chip-label">Option</span></div><div class="chip"><span class="chip-value">Autumn</span><span class="chip-label">Option</span></div></div><p>Programs designed around seasonal fish behavior and the best waters for each time of year. Great for returning anglers.</p></div>'
+        },
+        services: {
+          guided: {
+            label: 'DAY TRIP',
+            hint: 'Explore',
+            title: 'DAY TRIP',
+            tagline: 'A Complete One-Day Predator Fishing Package'
+          },
+          booking: {
+            label: 'PRIVATE TRIP',
+            hint: 'Explore',
+            title: 'PRIVATE TRIP',
+            tagline: 'A Private Package Built Around Your Group'
+          },
+          lessons: {
+            label: 'SEASONAL TRIP',
+            hint: 'Explore',
+            title: 'SEASONAL TRIP',
+            tagline: 'Multi-Day Packages For Every Season'
+          }
+        }
+      },
+      sv: {
+        htmlLang: 'sv',
+        pageTitle: 'Lakeside Predatorfishing — Sjöfiske i Norge',
+        description: 'Gädd- och abborrfiske i norra Norge och norra Sverige. Rovfiske i vatten där få eller ingen har fiskat tidigare. Kontakta Asgeir och Ola.',
+        skipLabel: 'Hoppa över intro',
+        languageSelectorAria: 'Språkval',
+        backToMainAria: 'Tillbaka till startsidan',
+        location: 'Karasjok, Norge',
+        defaultTagline: 'Det finns alltid en större fisk',
+        ctaCall: 'Ring oss',
+        ctaEmail: 'Mejla oss',
+        slides: {
+          default: 'Gädd- och abborrfiske i norra Norge och norra Sverige. Om du gillar rovfiske i vatten där få eller ingen har fiskat tidigare är vi rätt personer att kontakta &mdash; Asgeir &amp; Ola.',
+          guided: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">Gädda</span><span class="chip-label">Art</span></div><div class="chip"><span class="chip-value">Abborre</span><span class="chip-label">Art</span></div><div class="chip"><span class="chip-value">1 Dag</span><span class="chip-label">Varaktighet</span></div></div><p>Inkluderar båt, utrustning och lokal guidehjälp på avlägsna sjöar. Perfekt för besökare som vill ha en fokuserad dag av hög kvalitet på vattnet.</p></div>',
+          booking: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">1-6</span><span class="chip-label">Gruppstorlek</span></div><div class="chip"><span class="chip-value">Flexibel</span><span class="chip-label">Planering</span></div><div class="chip"><span class="chip-value">Anpassad</span><span class="chip-label">Upplägg</span></div></div><p>Välj tempo, favoritvatten och turens upplägg. Bäst för familjer, vänner och små grupper som vill ha en personlig upplevelse.</p></div>',
+          lessons: '<div class="tour-detail"><div class="detail-chips"><div class="chip"><span class="chip-value">Vår</span><span class="chip-label">Alternativ</span></div><div class="chip"><span class="chip-value">Sommar</span><span class="chip-label">Alternativ</span></div><div class="chip"><span class="chip-value">Höst</span><span class="chip-label">Alternativ</span></div></div><p>Program anpassade efter fiskens säsongsbeteende och de bästa vattnen för varje tid på året. Perfekt för återkommande sportfiskare.</p></div>'
+        },
+        services: {
+          guided: {
+            label: 'DAGSTUR',
+            hint: 'Utforska',
+            title: 'DAGSTUR',
+            tagline: 'Ett komplett endagspaket för rovfiske'
+          },
+          booking: {
+            label: 'PRIVAT TUR',
+            hint: 'Utforska',
+            title: 'PRIVAT TUR',
+            tagline: 'Ett privat paket anpassat för ditt sällskap'
+          },
+          lessons: {
+            label: 'SÄSONGSTUR',
+            hint: 'Utforska',
+            title: 'SÄSONGSTUR',
+            tagline: 'Flerdagspaket för varje säsong'
+          }
+        }
+      }
+    };
+    let currentLang = 'en';
+    let defaultTagline = translations[currentLang].defaultTagline;
     let activeSlideId = 'content-default';
     let isAnimating = false;
 
+    function updateServiceCards(langData) {
+      serviceItems.forEach(item => {
+        const panelId = item.dataset.panel;
+        const panelCopy = langData.services[panelId];
+        if (!panelCopy) return;
+        item.dataset.title = panelCopy.title;
+        item.dataset.tagline = panelCopy.tagline;
+        const labelEl = item.querySelector('span:not(.explore-hint)');
+        const hintEl = item.querySelector('.explore-hint');
+        if (labelEl) labelEl.textContent = panelCopy.label;
+        if (hintEl) hintEl.textContent = panelCopy.hint;
+      });
+    }
+
+    function updateSlideCopy(langData) {
+      if (defaultSlideEl) defaultSlideEl.innerHTML = langData.slides.default;
+      if (guidedSlideEl) guidedSlideEl.innerHTML = langData.slides.guided;
+      if (bookingSlideEl) bookingSlideEl.innerHTML = langData.slides.booking;
+      if (lessonsSlideEl) lessonsSlideEl.innerHTML = langData.slides.lessons;
+    }
+
+    function updateActiveHeroCopy(langData) {
+      const panelId = activeSlideId.replace('content-', '');
+      if (panelId === 'default') {
+        titleEl.innerHTML = buildWords(defaultTitle);
+        taglineEl.innerHTML = buildWords(defaultTagline);
+        titleEl.setAttribute('aria-label', defaultTitle);
+        taglineEl.setAttribute('aria-label', defaultTagline);
+        return;
+      }
+      const panelCopy = langData.services[panelId];
+      if (!panelCopy) return;
+      titleEl.innerHTML = buildWords(panelCopy.title);
+      taglineEl.innerHTML = buildWords(panelCopy.tagline);
+      titleEl.setAttribute('aria-label', panelCopy.title);
+      taglineEl.setAttribute('aria-label', panelCopy.tagline);
+    }
+
+    function applyLanguage(lang) {
+      if (isAnimating || !translations[lang] || lang === currentLang) return;
+      currentLang = lang;
+      const langData = translations[lang];
+      defaultTagline = langData.defaultTagline;
+
+      document.documentElement.lang = langData.htmlLang;
+      if (pageTitleEl) pageTitleEl.textContent = langData.pageTitle;
+      if (metaDescriptionEl) metaDescriptionEl.setAttribute('content', langData.description);
+      if (skipBtn) skipBtn.textContent = langData.skipLabel;
+      if (languageSwitcherEl) languageSwitcherEl.setAttribute('aria-label', langData.languageSelectorAria);
+      if (topCompanyNameEl) topCompanyNameEl.setAttribute('aria-label', langData.backToMainAria);
+      if (callBtnEl) callBtnEl.textContent = langData.ctaCall;
+      if (emailBtnEl) emailBtnEl.textContent = langData.ctaEmail;
+      if (locationEl) locationEl.textContent = langData.location;
+
+      updateServiceCards(langData);
+      updateSlideCopy(langData);
+      updateActiveHeroCopy(langData);
+
+      langButtons.forEach(btn => {
+        const selected = btn.dataset.lang === lang;
+        btn.classList.toggle('active', selected);
+        btn.setAttribute('aria-pressed', selected ? 'true' : 'false');
+      });
+    }
+
+    function buildArchedTitle() {
+      return '<svg class="arched-title-svg" viewBox="0 0 700 240" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 18 202 Q 350 32 682 202"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">LakesidePredatorfishing</textPath></text></svg>';
+    }
+
     function buildWords(text) {
       if (!text || !text.trim()) return '';
+      const normalized = text.replace(/\s+/g, '').toLowerCase();
+      if (normalized === 'lakesidepredatorfishing') return buildArchedTitle();
       return text.split(' ').map(w => '<span class="word" style="opacity:1;transform:none;filter:none;animation:none">' + w + '</span>').join('');
     }
 
@@ -676,6 +895,8 @@
 
       const currentSlide = document.getElementById(activeSlideId);
       const newSlide = document.getElementById(newId);
+      titleEl.setAttribute('aria-label', titleText);
+      taglineEl.setAttribute('aria-label', taglineText);
 
       // Slide title & tagline
       slideSwapElement(titleEl, titleText);
@@ -706,11 +927,19 @@
     }
 
     updateTopCompanyName();
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+    });
 
     serviceItems.forEach(item => {
       item.addEventListener('click', () => {
         const panelId = item.dataset.panel;
         const targetId = 'content-' + panelId;
+        const panelCopy = translations[currentLang] && translations[currentLang].services
+          ? translations[currentLang].services[panelId]
+          : null;
+        const panelTitle = panelCopy ? panelCopy.title : item.dataset.title;
+        const panelTagline = panelCopy ? panelCopy.tagline : item.dataset.tagline;
 
         if (activeSlideId === targetId) {
           switchContent('content-default', defaultTitle, defaultTagline);
@@ -720,7 +949,7 @@
 
         serviceItems.forEach(si => si.classList.remove('active'));
         item.classList.add('active');
-        switchContent(targetId, item.dataset.title, item.dataset.tagline);
+        switchContent(targetId, panelTitle, panelTagline);
       });
     });
 
