@@ -118,31 +118,29 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
-      width: 52px; height: 52px;
       display: inline-flex; align-items: center; justify-content: center;
-      background: none; border: none; padding: 0;
+      background: none; border: none; padding: 0.3rem 0;
       pointer-events: none; cursor: pointer;
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.4s ease, transform 0.3s ease;
     }
     .top-company-name.visible {
       opacity: 1;
       pointer-events: auto;
     }
-    .top-company-name img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid rgba(200,169,106,0.45);
-      box-shadow: 0 4px 22px rgba(0,0,0,0.35);
-      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
-      display: block;
+    .top-company-text {
+      font-family: 'Teko', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(242,245,244,0.6);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      text-align: center;
+      transition: color 0.3s ease;
     }
-    .top-company-name:hover img {
-      border-color: rgba(200,169,106,0.75);
-      box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 16px rgba(200,169,106,0.18);
-      transform: translateY(-1px);
+    .top-company-name:hover .top-company-text {
+      color: var(--warm-rope);
     }
 
     .language-switcher {
@@ -188,22 +186,29 @@
       font-size: clamp(1.6rem, 4vw, 2.75rem);
       color: #fff; font-weight: 500; letter-spacing: 0.02em; line-height: 1.1;
     }
+    h1.tour-title {
+      font-size: clamp(1.3rem, 3vw, 1.9rem);
+      letter-spacing: 0.12em;
+    }
     .kinetic-title {
-      width: min(100%, 720px);
-      min-height: clamp(72px, 11vw, 108px);
+      width: min(100%, 800px);
+      min-height: clamp(100px, 16vw, 170px);
       display: flex;
       align-items: flex-end;
       justify-content: center;
     }
+    .kinetic-title.tour-title {
+      min-height: auto;
+    }
     .arched-title-svg {
       display: block;
-      width: min(100%, 700px);
-      height: clamp(92px, 13vw, 126px);
+      width: min(100%, 780px);
+      height: clamp(120px, 18vw, 190px);
       overflow: visible;
     }
     .arched-title-text {
       font-family: 'Teko', sans-serif;
-      font-size: 74px;
+      font-size: 96px;
       font-weight: 500;
       letter-spacing: 0.05em;
       fill: #fff;
@@ -422,11 +427,93 @@
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
     /* ============================================
+       PAGE SLIDER
+       ============================================ */
+    .page-slider { position: fixed; inset: 0; overflow: hidden; }
+    .page-track {
+      display: flex; height: 100vh;
+      transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .page {
+      flex: 0 0 100vw; width: 100vw; height: 100vh;
+      position: relative; overflow: hidden;
+    }
+
+    /* Gallery pages (hidden for now) */
+    .gallery-page {
+      display: none; /* was: flex */ align-items: center; justify-content: center;
+      background: #000;
+    }
+    .gallery-bg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; filter: brightness(0.28);
+    }
+    .gallery-page .readability-overlay {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(6,10,14,0.45) 0%, rgba(6,10,14,0.6) 100%);
+    }
+    .gallery-content {
+      position: relative; z-index: 2; text-align: center;
+      padding: var(--space-xl);
+      max-width: 600px;
+      display: flex; flex-direction: column; align-items: center; gap: var(--space-md);
+    }
+    .gallery-content h2 {
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #fff; font-weight: 500; letter-spacing: 0.04em; line-height: 1.1;
+    }
+    .gallery-content p {
+      color: rgba(242,245,244,0.6); font-size: 0.92rem; line-height: 1.7;
+      max-width: 460px;
+    }
+    .gallery-content .gallery-divider {
+      width: 50px; height: 2px; background: var(--warm-rope); border: none;
+    }
+
+    /* Page arrows (hidden for now) */
+    .page-arrow {
+      display: none; /* hidden for now */
+      position: fixed; top: 50%; z-index: 10;
+      transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(10,16,21,0.45); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(242,245,244,0.2);
+      color: rgba(242,245,244,0.7);
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: opacity 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+    .page-arrow:hover {
+      color: var(--warm-rope); border-color: rgba(200,169,106,0.4);
+      transform: translateY(-50%) scale(1.05);
+    }
+    .page-arrow svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .page-arrow-left { left: 1.25rem; }
+    .page-arrow-right { right: 1.25rem; }
+    .page-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    /* Page dots (hidden for now) */
+    .page-dots {
+      display: none; /* hidden for now */
+      position: fixed; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+      z-index: 10; gap: 0.5rem;
+    }
+    .page-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(242,245,244,0.3); border: none; cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+      padding: 0;
+    }
+    .page-dot:hover { background: rgba(242,245,244,0.5); transform: scale(1.2); }
+    .page-dot.active { background: var(--warm-rope); }
+
+    /* ============================================
        RESPONSIVE
        ============================================ */
     @media (max-width: 900px) {
       .landing-content { gap: var(--space-sm); padding: var(--space-md) var(--space-lg); max-width: 700px; }
       h1 { font-size: clamp(1.5rem, 3.6vw, 2.35rem); }
+      h1.tour-title { font-size: clamp(1rem, 2.2vw, 1.4rem); }
       .tagline { font-size: clamp(0.74rem, 1.4vw, 0.84rem); }
       .content-area { max-width: 500px; }
       .content-slide { font-size: 0.85rem; }
@@ -435,16 +522,19 @@
       .cta-row { gap: 0.9rem; margin-top: var(--space-sm); }
       .btn { min-width: 140px; height: 42px; padding: 0 1.3rem; font-size: 0.79rem; }
       .bottom-bar { padding: 1.1rem 1.8rem; }
+      .gallery-content h2 { font-size: clamp(1.8rem, 4.5vw, 3rem); }
+      .gallery-content p { font-size: 0.88rem; }
     }
 
     @media (max-width: 600px) {
-      .top-company-name { top: 0.75rem; width: 42px; height: 42px; }
+      .top-company-name { top: 0.75rem; }
+      .top-company-text { font-size: 0.72rem; }
       .language-switcher { top: 0.7rem; right: 0.7rem; }
       .lang-btn { min-width: 34px; height: 28px; font-size: 0.62rem; }
       .landing-content { gap: var(--space-xs); padding: var(--space-md) var(--space-lg); }
-      .kinetic-title { width: 100%; min-height: 76px; }
-      .arched-title-svg { width: 100%; height: 92px; }
-      .arched-title-text { font-size: 56px; }
+      .kinetic-title { width: 100%; min-height: 90px; }
+      .arched-title-svg { width: 100%; height: 110px; }
+      .arched-title-text { font-size: 68px; }
       .divider { margin: 0.3rem auto; }
       .content-area { min-height: 74px; padding: 0 var(--space-md); }
       .content-slide { font-size: 0.8rem; padding: 0 0.24rem; }
@@ -470,12 +560,22 @@
       .tour-detail .chip-value { font-size: 0.85rem; }
       .tour-detail .chip-label { font-size: 0.56rem; }
       .tour-detail p { margin-top: 0.35rem; }
+      .page-arrow { width: 36px; height: 36px; }
+      .page-arrow svg { width: 16px; height: 16px; }
+      .page-arrow-left { left: 0.75rem; }
+      .page-arrow-right { right: 0.75rem; }
+      .page-dots { bottom: 0.8rem; gap: 0.4rem; }
+      .page-dot { width: 7px; height: 7px; }
+      .gallery-content { padding: var(--space-lg); }
+      .gallery-content h2 { font-size: clamp(1.5rem, 7vw, 2.2rem); }
+      .gallery-content p { font-size: 0.8rem; max-width: 340px; }
     }
 
     @media (max-width: 380px) {
       .landing-content { padding: var(--space-md); gap: var(--space-2xs); }
       h1 { font-size: clamp(1.35rem, 8.5vw, 1.7rem); }
-      .arched-title-text { font-size: 48px; }
+      h1.tour-title { font-size: clamp(0.9rem, 4vw, 1.15rem); }
+      .arched-title-text { font-size: 54px; }
       .tagline { font-size: clamp(0.72rem, 3.2vw, 0.8rem); }
       .services-row { gap: 0.75rem; }
       .service-item { min-width: 72px; padding: 0.42rem 0.24rem; }
@@ -497,6 +597,9 @@
       #intro-gif, #intro-overlay, .landing { transition: none; }
       .content-slide { transition: none; }
       .kinetic-title, .tagline { transition: none; }
+      .page-track { transition: none; }
+      .page-arrow { transition: none; }
+      .page-dot { transition: none; }
     }
   </style>
 </head>
@@ -511,8 +614,12 @@
     <button id="skip-btn">Skip Intro</button>
   </div>
 
+  <!-- PAGE SLIDER -->
+  <div class="page-slider">
+  <div class="page-track">
+
   <!-- LANDING PAGE -->
-  <main class="landing" id="landing">
+  <main class="landing page" id="landing">
     <picture>
       <source srcset="image1.webp" type="image/webp">
       <img src="image1.png" alt="Norwegian fjord" class="landing-bg" fetchpriority="high" decoding="async" width="1536" height="1024">
@@ -521,7 +628,7 @@
     <div class="aurora-overlay" aria-hidden="true"></div>
     <div class="grain-overlay" aria-hidden="true"></div>
     <button class="top-company-name" aria-label="Back to main page">
-      <img src="Lakeside Predatorfishing_logo.jpg" alt="Lakeside Predatorfishing logo">
+      <span class="top-company-text">Lakeside<br>Predatorfishing</span>
     </button>
     <div class="language-switcher" role="group" aria-label="Language selector">
       <button type="button" class="lang-btn active" data-lang="en" aria-pressed="true">EN</button>
@@ -530,9 +637,9 @@
 
     <div class="landing-content">
       <h1 class="kinetic-title" aria-label="Lakeside Predatorfishing">
-        <svg class="arched-title-svg" viewBox="0 0 700 240" role="presentation" aria-hidden="true">
+        <svg class="arched-title-svg" viewBox="0 0 840 280" role="presentation" aria-hidden="true">
           <defs>
-            <path id="main-title-arc" d="M 18 202 Q 350 32 682 202"></path>
+            <path id="main-title-arc" d="M 18 245 Q 420 30 822 245"></path>
           </defs>
           <text class="arched-title-text">
             <textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">LakesidePredatorfishing</textPath>
@@ -624,6 +731,59 @@
       <span class="copyright">&copy; 2026 Lakeside Predatorfishing</span>
     </div>
   </main>
+
+  <!-- GALLERY PAGE 1: The Waters -->
+  <section class="page gallery-page" data-page="1">
+    <img src="Deep Fjord and Mist.png" alt="Norwegian fjord scenery" class="gallery-bg" loading="lazy" decoding="async">
+    <div class="readability-overlay" aria-hidden="true"></div>
+    <div class="gallery-content">
+      <h2 class="gallery-title">The Waters</h2>
+      <hr class="gallery-divider">
+      <p class="gallery-desc">Remote lakes and fjords across Northern Norway and northern Sweden. Untouched waters where predator fish thrive in silence, waiting for the right angler.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY PAGE 2: The Catch -->
+  <section class="page gallery-page" data-page="2">
+    <img src="image1.png" alt="Pike fishing action" class="gallery-bg" loading="lazy" decoding="async">
+    <div class="readability-overlay" aria-hidden="true"></div>
+    <div class="gallery-content">
+      <h2 class="gallery-title">The Catch</h2>
+      <hr class="gallery-divider">
+      <p class="gallery-desc">Pike and perch in waters that few have ever fished. Every cast is a chance at something extraordinary — trophy fish in pristine wilderness.</p>
+    </div>
+  </section>
+
+  <!-- GALLERY PAGE 3: The Team -->
+  <section class="page gallery-page" data-page="3">
+    <img src="image1.png" alt="Asgeir and Ola on the water" class="gallery-bg" loading="lazy" decoding="async" style="filter: brightness(0.22) saturate(0.8);">
+    <div class="readability-overlay" aria-hidden="true"></div>
+    <div class="gallery-content">
+      <h2 class="gallery-title">The Team</h2>
+      <hr class="gallery-divider">
+      <p class="gallery-desc">Meet Asgeir and Ola — local guides with deep knowledge of these northern waters. They know where the big fish are, and they'll take you there.</p>
+    </div>
+  </section>
+
+  </div><!-- .page-track -->
+
+  <!-- Navigation arrows -->
+  <button class="page-arrow page-arrow-left hidden" aria-label="Previous page">
+    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="page-arrow page-arrow-right" aria-label="Next page">
+    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+  </button>
+
+  <!-- Page dots -->
+  <div class="page-dots">
+    <button class="page-dot active" data-page="0" aria-label="Page 1"></button>
+    <button class="page-dot" data-page="1" aria-label="Page 2"></button>
+    <button class="page-dot" data-page="2" aria-label="Page 3"></button>
+    <button class="page-dot" data-page="3" aria-label="Page 4"></button>
+  </div>
+
+  </div><!-- .page-slider -->
 
   <script>
     const overlay = document.getElementById('intro-overlay');
@@ -749,7 +909,12 @@
             title: 'SEASONAL TRIP',
             tagline: 'Multi-Day Packages For Every Season'
           }
-        }
+        },
+        gallery: [
+          { title: 'The Waters', desc: 'Remote lakes and fjords across Northern Norway and northern Sweden. Untouched waters where predator fish thrive in silence, waiting for the right angler.' },
+          { title: 'The Catch', desc: 'Pike and perch in waters that few have ever fished. Every cast is a chance at something extraordinary \u2014 trophy fish in pristine wilderness.' },
+          { title: 'The Team', desc: 'Meet Asgeir and Ola \u2014 local guides with deep knowledge of these northern waters. They know where the big fish are, and they\u2019ll take you there.' }
+        ]
       },
       sv: {
         htmlLang: 'sv',
@@ -787,7 +952,12 @@
             title: 'SÄSONGSTUR',
             tagline: 'Flerdagspaket för varje säsong'
           }
-        }
+        },
+        gallery: [
+          { title: 'Vattnen', desc: 'Avlägsna sjöar och fjordar i norra Norge och norra Sverige. Orörda vatten där rovfisken frodas i tystnad och väntar på rätt sportfiskare.' },
+          { title: 'Fångsten', desc: 'Gädda och abborre i vatten där få har fiskat. Varje kast är en chans till något extraordinärt \u2014 troféfisk i orörd vildmark.' },
+          { title: 'Teamet', desc: 'Möt Asgeir och Ola \u2014 lokala guider med djup kunskap om dessa nordliga vatten. De vet var storfisken finns, och de tar dig dit.' }
+        ]
       }
     };
     let currentLang = 'en';
@@ -833,6 +1003,18 @@
       taglineEl.setAttribute('aria-label', panelCopy.tagline);
     }
 
+    function updateGalleryCopy(langData) {
+      if (!langData.gallery) return;
+      var galleryPages = document.querySelectorAll('.gallery-page');
+      galleryPages.forEach(function(page, i) {
+        if (!langData.gallery[i]) return;
+        var titleEl2 = page.querySelector('.gallery-title');
+        var descEl = page.querySelector('.gallery-desc');
+        if (titleEl2) titleEl2.textContent = langData.gallery[i].title;
+        if (descEl) descEl.textContent = langData.gallery[i].desc;
+      });
+    }
+
     function applyLanguage(lang) {
       if (isAnimating || !translations[lang] || lang === currentLang) return;
       currentLang = lang;
@@ -852,6 +1034,7 @@
       updateServiceCards(langData);
       updateSlideCopy(langData);
       updateActiveHeroCopy(langData);
+      updateGalleryCopy(langData);
 
       langButtons.forEach(btn => {
         const selected = btn.dataset.lang === lang;
@@ -861,7 +1044,7 @@
     }
 
     function buildArchedTitle() {
-      return '<svg class="arched-title-svg" viewBox="0 0 700 240" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 18 202 Q 350 32 682 202"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">LakesidePredatorfishing</textPath></text></svg>';
+      return '<svg class="arched-title-svg" viewBox="0 0 840 280" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 18 245 Q 420 30 822 245"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">LakesidePredatorfishing</textPath></text></svg>';
     }
 
     function buildWords(text) {
@@ -893,10 +1076,14 @@
       if (isAnimating || newId === activeSlideId) return;
       isAnimating = true;
 
+      const isTour = newId !== 'content-default';
       const currentSlide = document.getElementById(activeSlideId);
       const newSlide = document.getElementById(newId);
       titleEl.setAttribute('aria-label', titleText);
       taglineEl.setAttribute('aria-label', taglineText);
+
+      // Toggle tour-title class for smaller tour titles
+      setTimeout(function() { titleEl.classList.toggle('tour-title', isTour); }, 300);
 
       // Slide title & tagline
       slideSwapElement(titleEl, titleText);
@@ -959,6 +1146,57 @@
       serviceItems.forEach(si => si.classList.remove('active'));
       switchContent('content-default', defaultTitle, defaultTagline);
     });
+
+    /* ============================
+       PAGE SLIDER
+       ============================ */
+    const pageTrack = document.querySelector('.page-track');
+    const allPages = document.querySelectorAll('.page');
+    const leftArrow = document.querySelector('.page-arrow-left');
+    const rightArrow = document.querySelector('.page-arrow-right');
+    const pageDots = document.querySelectorAll('.page-dot');
+    let currentPage = 0;
+
+    function goToPage(index) {
+      if (index < 0 || index >= allPages.length) return;
+      currentPage = index;
+      pageTrack.style.transform = 'translateX(-' + (index * 100) + 'vw)';
+      leftArrow.classList.toggle('hidden', index === 0);
+      rightArrow.classList.toggle('hidden', index === allPages.length - 1);
+      pageDots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
+      if (aurora) aurora.style.animationPlayState = index === 0 ? 'running' : 'paused';
+    }
+
+    leftArrow.addEventListener('click', function() { goToPage(currentPage - 1); });
+    rightArrow.addEventListener('click', function() { goToPage(currentPage + 1); });
+    pageDots.forEach(function(dot) {
+      dot.addEventListener('click', function() { goToPage(parseInt(dot.dataset.page)); });
+    });
+
+    /* Keyboard navigation */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') goToPage(currentPage - 1);
+      if (e.key === 'ArrowRight') goToPage(currentPage + 1);
+    });
+
+    /* Touch swipe */
+    (function() {
+      var startX = 0;
+      var startY = 0;
+      var slider = document.querySelector('.page-slider');
+      slider.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      }, { passive: true });
+      slider.addEventListener('touchend', function(e) {
+        var dx = e.changedTouches[0].clientX - startX;
+        var dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+          if (dx < 0) goToPage(currentPage + 1);
+          else goToPage(currentPage - 1);
+        }
+      }, { passive: true });
+    })();
   </script>
 
 </body>
