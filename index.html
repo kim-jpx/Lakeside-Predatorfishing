@@ -7,7 +7,7 @@
   <meta name="description" content="Pike and perch fishing in Northern Norway &amp; northern Sweden. Predator fishing in waters that few or no one has fished in before. Contact Asgeir &amp; Ola.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Teko:wght@400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --fjord-blue: #1F3A44;
@@ -15,11 +15,17 @@
       --mist-grey: #F2F5F4;
       --warm-rope: #C8A96A;
       --charcoal: #2A2E2F;
+      --space-2xs: 0.2rem;
+      --space-xs: 0.4rem;
+      --space-sm: 0.65rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
     }
 
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { height: 100%; overflow: hidden; }
-    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: #000; }
+    body { font-family: 'Exo 2', sans-serif; color: var(--charcoal); background: #000; }
 
     /* ============================================
        INTRO OVERLAY
@@ -39,7 +45,7 @@
       background: rgba(255,255,255,0.1); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
       border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7);
       padding: 0.5rem 1.2rem; border-radius: 4px;
-      font-family: 'Inter', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.3s;
+      font-family: 'Exo 2', sans-serif; font-size: 0.8rem; cursor: pointer; transition: all 0.3s;
     }
     #skip-btn:hover { background: rgba(255,255,255,0.2); color: #fff; }
     #skip-btn.hidden { opacity: 0; pointer-events: none; }
@@ -56,8 +62,16 @@
 
     .landing-bg {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; filter: brightness(0.35);
+      object-fit: cover; filter: brightness(0.22);
       transition: filter 0.6s ease;
+    }
+
+    .readability-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(6,10,14,0.52) 0%, rgba(6,10,14,0.62) 100%);
     }
 
     /* Aurora */
@@ -89,14 +103,49 @@
        ============================================ */
     .landing-content {
       position: relative; z-index: 2; text-align: center;
-      padding: 0 1.5rem;
+      padding: var(--space-xs) 1.85rem var(--space-2xs);
       display: flex; flex-direction: column; align-items: center;
-      gap: 1rem; max-width: 640px;
+      gap: 1.12rem; max-width: 660px;
       transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    .top-company-name {
+      position: absolute;
+      top: 1.15rem;
+      left: 50%;
+      transform: translateX(calc(-50% + 60px));
+      z-index: 3;
+      width: 60px; height: 60px;
+      display: inline-flex; align-items: center; justify-content: center;
+      background: none; border: none; padding: 0;
+      pointer-events: none; cursor: pointer;
+      opacity: 0;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+    }
+    .top-company-name.visible {
+      opacity: 1;
+      transform: translateX(-50%);
+      pointer-events: auto;
+    }
+    .top-company-name img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(200,169,106,0.45);
+      box-shadow: 0 4px 22px rgba(0,0,0,0.35);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      display: block;
+    }
+    .top-company-name:hover img {
+      border-color: rgba(200,169,106,0.75);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4), 0 0 16px rgba(200,169,106,0.18);
+      transform: translateY(-1px);
     }
 
     /* Logo */
     .logo {
+      display: none;
       width: 110px; height: 110px; border-radius: 50%; object-fit: cover;
       border: 3px solid rgba(200,169,106,0.4);
       opacity: 0; transform: translateY(20px);
@@ -112,13 +161,13 @@
 
     /* Typography */
     h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 4.5vw, 2.8rem);
-      color: #fff; font-weight: 700; letter-spacing: 0.02em; line-height: 1.1;
+      font-family: 'Teko', sans-serif;
+      font-size: clamp(1.75rem, 4.8vw, 3rem);
+      color: #fff; font-weight: 500; letter-spacing: 0.02em; line-height: 1.1;
     }
     .tagline {
       font-size: clamp(0.65rem, 1.3vw, 0.85rem);
-      color: var(--warm-rope); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500;
+      color: var(--warm-rope); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
     }
     .kinetic-title .word, .tagline .word {
       display: inline-block; opacity: 0; transform: translateY(25px); filter: blur(8px);
@@ -145,7 +194,7 @@
     .divider {
       width: 60px; height: 2px; background: var(--warm-rope); border: none;
       opacity: 0; animation: fadeUp 1s ease forwards; animation-delay: 1.1s;
-      margin: 0.3rem 0;
+      margin: 0.45rem 0;
     }
     .divider.breathing { animation: fadeUp 1s ease forwards, breathe 4s ease-in-out 2.5s infinite; }
     @keyframes breathe {
@@ -159,6 +208,7 @@
       min-height: 80px;
       max-width: 480px;
       width: 100%;
+      padding: 0 0.2rem;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.4s;
       overflow: hidden;
@@ -166,42 +216,60 @@
 
     .content-slide {
       color: rgba(242,245,244,0.6); font-size: 0.82rem; line-height: 1.65;
-      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease, filter 0.4s ease;
     }
 
-    .content-slide.exit-left {
-      transform: translateX(-110%); opacity: 0;
+    /* Collapse/expand (default <-> trip) */
+    .content-slide.collapse-out {
+      transform: scale(0); opacity: 0; filter: blur(6px);
       position: absolute; top: 0; left: 0; right: 0;
     }
-    .content-slide.exit-right {
-      transform: translateX(110%); opacity: 0;
+    .content-slide.expand-in {
+      transform: scale(0); opacity: 0; filter: blur(6px);
+    }
+
+    /* Slide (trip <-> trip) */
+    .content-slide.exit-left {
+      transform: translateX(-110%); opacity: 0;
       position: absolute; top: 0; left: 0; right: 0;
     }
     .content-slide.enter-from-right {
       transform: translateX(110%); opacity: 0;
     }
-    .content-slide.enter-from-left {
-      transform: translateX(-110%); opacity: 0;
-    }
+
     .content-slide.active {
-      transform: translateX(0); opacity: 1;
+      transform: translateX(0) scale(1); opacity: 1; filter: blur(0);
       position: relative;
     }
     .content-slide.hidden {
       display: none;
     }
 
+    /* Collapsible zone elements (collapse class for default<->trip) */
+    .divider.collapse,
+    .content-area.collapse,
+    .cta-row.collapse {
+      transform: scale(0) !important; opacity: 0 !important;
+      transition: transform 0.55s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease !important;
+    }
+    .divider.uncollapse,
+    .content-area.uncollapse,
+    .cta-row.uncollapse {
+      transition: transform 0.65s cubic-bezier(0.16,1,0.3,1), opacity 0.55s ease !important;
+    }
+
     /* Tour detail inline styles */
     .tour-detail .detail-chips {
       display: flex; gap: 1.2rem; justify-content: center;
-      margin: 0.5rem 0;
+      margin: 0.7rem 0;
     }
     .tour-detail .chip {
       text-align: center;
+      padding: 0 0.9rem;
     }
     .tour-detail .chip-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; color: var(--warm-rope); font-weight: 700;
+      font-family: 'Teko', sans-serif;
+      font-size: 1rem; color: var(--warm-rope); font-weight: 500;
       display: block;
     }
     .tour-detail .chip-label {
@@ -210,30 +278,31 @@
       display: block;
     }
     .tour-detail p {
-      margin-top: 0.3rem;
+      margin-top: 0.45rem;
     }
 
     /* Active service indicator */
     .service-item.active { color: var(--warm-rope); }
     .service-item.active .explore-hint { color: rgba(200,169,106,0.6); }
 
-    /* Title swap transition */
-    .kinetic-title {
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+    /* Title/tagline swap transitions */
+    .kinetic-title, .tagline {
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, filter 0.35s ease;
     }
-    .kinetic-title.swap-out {
+
+    /* Collapse mode (default <-> trip) */
+    .kinetic-title.swap-out, .tagline.swap-out {
+      transform: scale(0); opacity: 0; filter: blur(8px);
+    }
+    .kinetic-title.swap-in, .tagline.swap-in {
+      transform: scale(0); opacity: 0; filter: blur(8px);
+    }
+
+    /* Slide mode (trip <-> trip) */
+    .kinetic-title.slide-out, .tagline.slide-out {
       transform: translateX(-60px); opacity: 0;
     }
-    .kinetic-title.swap-in {
-      transform: translateX(60px); opacity: 0;
-    }
-    .tagline {
-      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
-    }
-    .tagline.swap-out {
-      transform: translateX(-60px); opacity: 0;
-    }
-    .tagline.swap-in {
+    .kinetic-title.slide-in, .tagline.slide-in {
       transform: translateX(60px); opacity: 0;
     }
 
@@ -245,13 +314,13 @@
       align-items: flex-start;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 2s;
-      margin-top: 0.4rem;
+      margin-top: 0.75rem;
     }
 
     .service-item {
       text-align: center; color: rgba(242,245,244,0.5);
       cursor: pointer; transition: all 0.3s; position: relative;
-      padding: 0.5rem 0.5rem;
+      padding: 0.62rem 0.58rem;
       min-width: 100px;
       display: flex; flex-direction: column; align-items: center;
     }
@@ -275,17 +344,17 @@
       text-transform: uppercase; font-size: 0.65rem;
       line-height: 1.15;
     }
-    .service-item > span:first-of-type { margin-top: 0.3rem; }
+    .service-item > span:first-of-type { margin-top: 0.38rem; }
     .service-item .explore-hint {
       display: block; font-size: 0.5rem; color: rgba(242,245,244,0.3);
-      letter-spacing: 0.05em; margin-top: 0.18rem; text-transform: none;
+      letter-spacing: 0.05em; margin-top: 0.22rem; text-transform: none;
       transition: color 0.3s;
     }
     .service-item:hover .explore-hint { color: rgba(200,169,106,0.6); }
 
     /* CTA */
     .cta-row {
-      display: flex; gap: 1rem; margin-top: 0.5rem;
+      display: flex; gap: 1.1rem; margin-top: 0.8rem;
       justify-content: center; align-items: center;
       opacity: 0; transform: translateY(20px);
       animation: fadeUp 1s ease forwards; animation-delay: 1.8s;
@@ -319,14 +388,14 @@
     .bottom-bar {
       position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 0.8rem 2rem;
+      padding: 1rem 2.2rem;
       background: rgba(31,58,68,0.5); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
       opacity: 0; animation: fadeUp 1s ease forwards; animation-delay: 2.2s;
       transition: opacity 0.4s ease;
     }
 
     .bottom-bar .contact-info {
-      display: flex; gap: 2rem; font-size: 0.8rem; color: rgba(242,245,244,0.7);
+      display: flex; gap: 2.2rem; font-size: 0.8rem; color: rgba(242,245,244,0.7);
     }
     .bottom-bar .contact-info a {
       color: rgba(242,245,244,0.7); text-decoration: none; transition: color 0.3s;
@@ -340,27 +409,30 @@
        RESPONSIVE
        ============================================ */
     @media (max-width: 600px) {
-      .landing-content { gap: 0.7rem; }
+      .top-company-name { top: 0.7rem; width: 48px; height: 48px; }
+      .landing-content { gap: 0.82rem; padding: 0.28rem 1.1rem 0.2rem; }
       .logo { width: 80px; height: 80px; margin-bottom: 0.15rem; }
-      .divider { margin: 0.2rem 0; }
-      .content-area { min-height: 70px; }
+      .divider { margin: 0.28rem 0; }
+      .content-area { min-height: 74px; padding: 0 0.16rem; }
       .content-slide { font-size: 0.75rem; padding: 0 0.3rem; }
-      .services-row { gap: 1.6rem; margin-top: 0.2rem; }
-      .service-item { min-width: 80px; padding: 0.4rem 0.3rem; }
+      .services-row { gap: 1.45rem; margin-top: 0.35rem; }
+      .service-item { min-width: 80px; padding: 0.46rem 0.35rem; }
       .service-item .icon svg { width: 20px; height: 20px; }
       .service-item .icon { width: 20px; height: 20px; }
-      .service-item > span:first-of-type { margin-top: 0.25rem; }
+      .service-item > span:first-of-type { margin-top: 0.28rem; }
       .service-item span { font-size: 0.55rem; }
-      .service-item .explore-hint { margin-top: 0.15rem; font-size: 0.45rem; }
-      .cta-row { flex-direction: column; align-items: center; gap: 0.5rem; margin-top: 0.3rem; }
+      .service-item .explore-hint { margin-top: 0.16rem; font-size: 0.45rem; }
+      .cta-row { flex-direction: column; align-items: center; gap: 0.55rem; margin-top: 0.45rem; }
       .btn { min-width: 160px; height: 38px; font-size: 0.75rem; }
-      .bottom-bar { flex-direction: column; gap: 0.4rem; text-align: center; padding: 0.6rem 1.5rem; }
-      .bottom-bar .contact-info { flex-direction: column; gap: 0.2rem; font-size: 0.72rem; }
+      .bottom-bar { flex-direction: column; gap: 0.45rem; text-align: center; padding: 0.75rem 1.35rem; }
+      .bottom-bar .contact-info { flex-direction: column; gap: 0.24rem; font-size: 0.72rem; }
       .bottom-bar .copyright { font-size: 0.62rem; }
       .aurora-overlay { animation-duration: 30s; }
-      .tour-detail .detail-chips { gap: 0.7rem; }
+      .tour-detail .detail-chips { gap: 0.9rem; margin: 0.62rem 0; }
+      .tour-detail .chip { padding: 0 0.6rem; }
       .tour-detail .chip-value { font-size: 0.85rem; }
       .tour-detail .chip-label { font-size: 0.52rem; }
+      .tour-detail p { margin-top: 0.35rem; }
     }
 
     /* ============================================
@@ -375,6 +447,7 @@
       .divider.breathing { animation: none; }
       #intro-gif, #intro-overlay, .landing { transition: none; }
       .content-slide { transition: none; }
+      .kinetic-title, .tagline { transition: none; }
     }
   </style>
 </head>
@@ -382,15 +455,25 @@
 
   <!-- INTRO -->
   <div id="intro-overlay">
-    <img id="intro-gif" src="Lakeside Predatorfishing_intro.gif" alt="Intro">
+    <video id="intro-gif" autoplay muted loop playsinline webkit-playsinline preload="auto" aria-label="Predator fishing intro">
+      <source src="video1.webm" type="video/webm">
+      <source src="video1.mp4" type="video/mp4">
+    </video>
     <button id="skip-btn">Skip Intro</button>
   </div>
 
   <!-- LANDING PAGE -->
   <main class="landing" id="landing">
-    <img src="Deep Fjord and Mist.png" alt="Norwegian fjord" class="landing-bg">
+    <picture>
+      <source srcset="image1.webp" type="image/webp">
+      <img src="image1.png" alt="Norwegian fjord" class="landing-bg" fetchpriority="high" decoding="async" width="1536" height="1024">
+    </picture>
+    <div class="readability-overlay" aria-hidden="true"></div>
     <div class="aurora-overlay" aria-hidden="true"></div>
     <div class="grain-overlay" aria-hidden="true"></div>
+    <button class="top-company-name" aria-label="Back to main page">
+      <img src="Lakeside Predatorfishing_logo.jpg" alt="Lakeside Predatorfishing logo">
+    </button>
 
     <div class="landing-content">
       <img src="Lakeside Predatorfishing_logo.jpg" alt="Lakeside Predatorfishing" class="logo">
@@ -452,25 +535,25 @@
       </div>
 
       <div class="services-row">
-        <div class="service-item" data-panel="guided" data-title="Day Trip" data-tagline="A Complete One-Day Predator Fishing Package">
+        <div class="service-item" data-panel="guided" data-title="DAY TRIP" data-tagline="A Complete One-Day Predator Fishing Package">
           <div class="icon">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><line x1="3" y1="13" x2="21" y2="13"/><path d="M3 17C4.5 15.8 6 15.8 7.5 17C9 18.2 10.5 18.2 12 17C13.5 15.8 15 15.8 16.5 17C18 18.2 19.5 18.2 21 17"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="7.5" y1="4.5" x2="8.9" y2="5.9"/><line x1="16.5" y1="4.5" x2="15.1" y2="5.9"/></svg>
           </div>
-          <span>Day Trip</span>
+          <span>DAY TRIP</span>
           <span class="explore-hint">Explore</span>
         </div>
-        <div class="service-item" data-panel="booking" data-title="Private Trip" data-tagline="A Private Package Built Around Your Group">
+        <div class="service-item" data-panel="booking" data-title="PRIVATE TRIP" data-tagline="A Private Package Built Around Your Group">
           <div class="icon">
             <svg viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V8.5C8 6 9.8 4 12 4C14.2 4 16 6 16 8.5V10"/><circle cx="12" cy="15" r="1.2"/><line x1="12" y1="16.2" x2="12" y2="18"/></svg>
           </div>
-          <span>Private Trip</span>
+          <span>PRIVATE TRIP</span>
           <span class="explore-hint">Explore</span>
         </div>
-        <div class="service-item" data-panel="lessons" data-title="Seasonal Trip" data-tagline="Multi-Day Packages For Every Season">
+        <div class="service-item" data-panel="lessons" data-title="SEASONAL TRIP" data-tagline="Multi-Day Packages For Every Season">
           <div class="icon">
             <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2"/><line x1="4" y1="10" x2="20" y2="10"/><line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/><path d="M12 18C12 18 15.5 15.8 15.5 13.2C13.6 13.2 12 14.4 12 16.2C12 14.4 10.4 13.2 8.5 13.2C8.5 15.8 12 18 12 18Z"/></svg>
           </div>
-          <span>Seasonal Trip</span>
+          <span>SEASONAL TRIP</span>
           <span class="explore-hint">Explore</span>
         </div>
       </div>
@@ -493,6 +576,19 @@
     const aurora = document.querySelector('.aurora-overlay');
     const divider = document.querySelector('.divider');
 
+    if (gif && gif.tagName === 'VIDEO') {
+      gif.muted = true;
+      const tryPlayIntro = () => {
+        const playPromise = gif.play();
+        if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(() => {});
+      };
+      if (gif.readyState >= 2) tryPlayIntro();
+      else gif.addEventListener('canplay', tryPlayIntro, { once: true });
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && !overlay.classList.contains('fade-out')) tryPlayIntro();
+      });
+    }
+
     /* Intro */
     function revealLanding() {
       landing.classList.add('visible');
@@ -504,7 +600,11 @@
       gif.classList.add('dim');
       setTimeout(() => {
         revealLanding();
-        setTimeout(() => { overlay.classList.add('fade-out'); skipBtn.classList.add('hidden'); }, 400);
+        setTimeout(() => {
+          overlay.classList.add('fade-out');
+          skipBtn.classList.add('hidden');
+          if (gif && gif.tagName === 'VIDEO') gif.pause();
+        }, 400);
       }, 1200);
     }
 
@@ -514,102 +614,181 @@
       gif.classList.add('dim');
       setTimeout(() => {
         revealLanding();
-        setTimeout(() => { overlay.classList.add('fade-out'); skipBtn.classList.add('hidden'); }, 300);
+        setTimeout(() => {
+          overlay.classList.add('fade-out');
+          skipBtn.classList.add('hidden');
+          if (gif && gif.tagName === 'VIDEO') gif.pause();
+        }, 300);
       }, 600);
     });
 
     /* Inline content switching */
     const serviceItems = document.querySelectorAll('.service-item[data-panel]');
-    const allSlides = document.querySelectorAll('.content-slide');
     const titleEl = document.querySelector('.kinetic-title');
     const taglineEl = document.querySelector('.tagline');
+    const dividerEl = document.querySelector('.divider');
+    const contentArea = document.querySelector('.content-area');
+    const ctaRow = document.querySelector('.cta-row');
+    const topCompanyNameEl = document.querySelector('.top-company-name');
     const defaultTitle = 'Lakeside Predatorfishing';
     const defaultTagline = "It's Always A Bigger Fish";
     let activeSlideId = 'content-default';
     let isAnimating = false;
+    let isDefaultView = true;
 
-    function swapElement(el, newText, direction) {
-      const exitClass = direction === 'left' ? 'swap-out' : 'swap-in';
-      const enterClass = direction === 'left' ? 'swap-in' : 'swap-out';
+    function buildWords(text) {
+      if (!text || !text.trim()) return '';
+      return text.split(' ').map(w => '<span class="word" style="opacity:1;transform:none;filter:none;animation:none">' + w + '</span>').join('');
+    }
 
-      el.classList.add(exitClass);
+    function updateTopCompanyName(targetId = activeSlideId) {
+      if (!topCompanyNameEl) return;
+      topCompanyNameEl.classList.toggle('visible', targetId !== 'content-default');
+    }
 
+    /* ---- COLLAPSE transition (default <-> trip) ---- */
+    function collapseZone(callback) {
+      // Collapse title, tagline, divider, content area, CTA
+      titleEl.classList.add('swap-out');
+      taglineEl.classList.add('swap-out');
+      dividerEl.classList.add('collapse');
+      contentArea.classList.add('collapse');
+      ctaRow.classList.add('collapse');
+
+      setTimeout(callback, 600);
+    }
+
+    function expandZone(titleText, taglineText) {
+      // Update text
+      titleEl.innerHTML = buildWords(titleText);
+      taglineEl.innerHTML = buildWords(taglineText);
+
+      // Remove collapse, add uncollapse for smooth expand
+      titleEl.classList.remove('swap-out');
+      taglineEl.classList.remove('swap-out');
+
+      titleEl.classList.add('swap-in');
+      taglineEl.classList.add('swap-in');
+      titleEl.offsetHeight;
+      requestAnimationFrame(() => {
+        titleEl.classList.remove('swap-in');
+        taglineEl.classList.remove('swap-in');
+      });
+
+      dividerEl.classList.remove('collapse');
+      dividerEl.classList.add('uncollapse');
+      contentArea.classList.remove('collapse');
+      contentArea.classList.add('uncollapse');
+      ctaRow.classList.remove('collapse');
+      ctaRow.classList.add('uncollapse');
+
+      // Clean up uncollapse classes after transition
       setTimeout(() => {
-        el.innerHTML = newText.split(' ').map(w => '<span class="word" style="opacity:1;transform:none;filter:none;animation:none">' + w + '</span>').join('');
-        el.classList.remove(exitClass);
-        el.classList.add(enterClass);
+        dividerEl.classList.remove('uncollapse');
+        contentArea.classList.remove('uncollapse');
+        ctaRow.classList.remove('uncollapse');
+      }, 700);
+    }
+
+    /* ---- SLIDE transition (trip <-> trip) ---- */
+    function slideSwapElement(el, newText) {
+      el.classList.add('slide-out');
+      setTimeout(() => {
+        el.innerHTML = buildWords(newText);
+        el.classList.remove('slide-out');
+        el.classList.add('slide-in');
         el.offsetHeight;
-        requestAnimationFrame(() => {
-          el.classList.remove(enterClass);
-        });
+        requestAnimationFrame(() => { el.classList.remove('slide-in'); });
       }, 300);
     }
 
-    function switchContent(newId, titleText, taglineText, direction) {
+    /* ---- Main switch function ---- */
+    function switchContent(newId, titleText, taglineText) {
       if (isAnimating || newId === activeSlideId) return;
       isAnimating = true;
 
       const currentSlide = document.getElementById(activeSlideId);
       const newSlide = document.getElementById(newId);
+      const goingToDefault = newId === 'content-default';
+      const leavingDefault = activeSlideId === 'content-default';
 
-      const exitClass = direction === 'left' ? 'exit-left' : 'exit-right';
-      const enterClass = direction === 'left' ? 'enter-from-right' : 'enter-from-left';
+      if (leavingDefault || goingToDefault) {
+        // COLLAPSE mode: default <-> trip
+        collapseZone(() => {
+          // Swap content slides
+          currentSlide.classList.remove('active');
+          currentSlide.classList.add('hidden');
 
-      // Swap title and tagline
-      swapElement(titleEl, titleText, direction);
-      swapElement(taglineEl, taglineText, direction);
+          newSlide.classList.remove('hidden');
+          newSlide.classList.add('expand-in');
+          newSlide.offsetHeight;
+          requestAnimationFrame(() => {
+            newSlide.classList.remove('expand-in');
+            newSlide.classList.add('active');
+          });
 
-      // Exit current
-      currentSlide.classList.remove('active');
-      currentSlide.classList.add(exitClass);
+          // Expand everything back
+          expandZone(titleText, taglineText);
+          updateTopCompanyName(newId);
 
-      // Prepare new slide
-      newSlide.classList.remove('hidden');
-      newSlide.classList.add(enterClass);
+          setTimeout(() => {
+            activeSlideId = newId;
+            isDefaultView = goingToDefault;
+            updateTopCompanyName();
+            isAnimating = false;
+          }, 700);
+        });
+      } else {
+        // SLIDE mode: trip <-> trip
+        slideSwapElement(titleEl, titleText);
+        slideSwapElement(taglineEl, taglineText);
 
-      // Force reflow
-      newSlide.offsetHeight;
+        currentSlide.classList.remove('active');
+        currentSlide.classList.add('exit-left');
 
-      // Animate in
-      requestAnimationFrame(() => {
-        newSlide.classList.remove(enterClass);
-        newSlide.classList.add('active');
-      });
+        newSlide.classList.remove('hidden');
+        newSlide.classList.add('enter-from-right');
+        newSlide.offsetHeight;
 
-      // Cleanup after transition
-      setTimeout(() => {
-        currentSlide.classList.remove(exitClass);
-        currentSlide.classList.add('hidden');
-        activeSlideId = newId;
-        isAnimating = false;
-      }, 460);
+        requestAnimationFrame(() => {
+          newSlide.classList.remove('enter-from-right');
+          newSlide.classList.add('active');
+        });
+
+        setTimeout(() => {
+          currentSlide.classList.remove('exit-left');
+          currentSlide.classList.add('hidden');
+          activeSlideId = newId;
+          updateTopCompanyName();
+          isAnimating = false;
+        }, 460);
+      }
     }
+
+    updateTopCompanyName();
 
     serviceItems.forEach(item => {
       item.addEventListener('click', () => {
         const panelId = item.dataset.panel;
         const targetId = 'content-' + panelId;
 
-        // Toggle: if already showing this, go back to default
         if (activeSlideId === targetId) {
-          switchContent('content-default', defaultTitle, defaultTagline, 'right');
+          switchContent('content-default', defaultTitle, defaultTagline);
           item.classList.remove('active');
           return;
         }
 
-        // Deactivate all service items, activate clicked one
         serviceItems.forEach(si => si.classList.remove('active'));
         item.classList.add('active');
-
-        switchContent(targetId, item.dataset.title, item.dataset.tagline, 'left');
+        switchContent(targetId, item.dataset.title, item.dataset.tagline);
       });
     });
 
-    /* Logo click — reset to default */
-    document.querySelector('.logo').addEventListener('click', () => {
+    /* Top logo click — reset to default */
+    topCompanyNameEl.addEventListener('click', () => {
       if (activeSlideId === 'content-default') return;
       serviceItems.forEach(si => si.classList.remove('active'));
-      switchContent('content-default', defaultTitle, defaultTagline, 'right');
+      switchContent('content-default', defaultTitle, defaultTagline);
     });
   </script>
 
