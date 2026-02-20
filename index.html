@@ -801,102 +801,6 @@
       animation-delay: 1.0s;
     }
 
-    /* Social proof – marquee ticker */
-    .social-proof-row {
-      position: absolute;
-      bottom: 60px;
-      left: 0;
-      right: 0;
-      display: flex;
-      gap: 2.5rem;
-      padding: 0 2rem;
-      box-sizing: border-box;
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease forwards;
-      animation-delay: 2.1s;
-      z-index: 2;
-    }
-
-    .social-proof-card {
-      flex: 1 1 0;
-      min-width: 0;
-      overflow: hidden;
-      padding: 0.5rem 0;
-      border: none;
-      background: none;
-      position: relative;
-      text-align: center;
-    }
-
-    /* Fade-out masks on card edges */
-    .social-proof-card::before,
-    .social-proof-card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 32px;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .social-proof-card::before {
-      left: 0;
-      background: linear-gradient(to right, var(--deep-lake), transparent);
-    }
-
-    .social-proof-card::after {
-      right: 0;
-      background: linear-gradient(to left, var(--deep-lake), transparent);
-    }
-
-    .marquee-inner {
-      display: inline-block;
-      white-space: nowrap;
-      animation: marquee-scroll linear infinite;
-      animation-duration: var(--marquee-duration, 18s);
-    }
-
-    .social-proof-card:hover .marquee-inner {
-      animation-play-state: paused;
-    }
-
-    .social-proof-text {
-      color: rgba(242, 245, 244, 0.6);
-      font-size: 0.78rem;
-      line-height: 1;
-      display: inline;
-    }
-
-    .social-proof-author {
-      display: block;
-      text-align: center;
-      color: var(--warm-rope);
-      font-family: 'Teko', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-top: 0.4rem;
-      opacity: 0.7;
-    }
-
-    .marquee-separator {
-      display: inline-block;
-      width: 3rem;
-    }
-
-    @keyframes marquee-scroll {
-      0% {
-        transform: translateX(0);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
 
     /* CTA */
     .cta-row {
@@ -1381,17 +1285,7 @@
         margin-top: var(--space-sm);
       }
 
-      .social-proof-row {
-        margin-top: var(--space-md);
-      }
 
-      .social-proof-text {
-        font-size: 0.72rem;
-      }
-
-      .social-proof-author {
-        font-size: 0.76rem;
-      }
 
       .btn {
         min-width: 140px;
@@ -1475,17 +1369,7 @@
         margin-top: var(--space-xs);
       }
 
-      .social-proof-row {
-        margin-top: var(--space-sm);
-      }
 
-      .social-proof-text {
-        font-size: 0.68rem;
-      }
-
-      .social-proof-author {
-        font-size: 0.7rem;
-      }
 
       .service-item {
         min-width: 84px;
@@ -1674,7 +1558,7 @@
       .divider,
       .content-area,
       .services-row,
-      .social-proof-row,
+
       .cta-row,
       .bottom-bar {
         animation: none;
@@ -1895,32 +1779,6 @@
 
         </div>
 
-        <div class="social-proof-row" aria-label="Happy customer stories">
-          <article class="social-proof-card">
-            <div class="marquee-inner">
-              <span class="social-proof-text" id="social-proof-text-1">Booked a day trip with Asgeir and Ola and landed
-                my biggest pike so far. Remote waters, calm pace, and great guidance all day.</span>
-              <span class="marquee-separator"></span>
-            </div>
-            <span class="social-proof-author" id="social-proof-author-1">— Daniel M., Stockholm</span>
-          </article>
-          <article class="social-proof-card">
-            <div class="marquee-inner">
-              <span class="social-proof-text" id="social-proof-text-2">The private trip felt fully tailored to our
-                group. We caught perch consistently and learned techniques we now use back home.</span>
-              <span class="marquee-separator"></span>
-            </div>
-            <span class="social-proof-author" id="social-proof-author-2">— Emma &amp; Lucas, Uppsala</span>
-          </article>
-          <article class="social-proof-card">
-            <div class="marquee-inner">
-              <span class="social-proof-text" id="social-proof-text-3">Everything was ready when we arrived: boat, gear,
-                and plan for the day. Professional hosts, beautiful waters, and fishing we will repeat.</span>
-              <span class="marquee-separator"></span>
-            </div>
-            <span class="social-proof-author" id="social-proof-author-3">— Johan R., Tromso</span>
-          </article>
-        </div>
 
         <div class="bottom-bar">
           <div class="contact-info">
@@ -2080,17 +1938,7 @@
     const callBtnEl = document.querySelector('.btn-primary');
     const emailBtnEl = document.querySelector('.btn-outline');
     const locationEl = document.querySelector('.contact-info span');
-    const socialProofRowEl = document.querySelector('.social-proof-row');
-    const socialProofTextEls = [
-      document.getElementById('social-proof-text-1'),
-      document.getElementById('social-proof-text-2'),
-      document.getElementById('social-proof-text-3')
-    ];
-    const socialProofAuthorEls = [
-      document.getElementById('social-proof-author-1'),
-      document.getElementById('social-proof-author-2'),
-      document.getElementById('social-proof-author-3')
-    ];
+
     const defaultSlideEl = document.getElementById('content-default');
     const guidedSlideEl = document.getElementById('content-guided');
     const bookingSlideEl = document.getElementById('content-booking');
@@ -2134,23 +1982,7 @@
             tagline: 'Multi-Day Packages For Every Season'
           }
         },
-        socialProof: {
-          ariaLabel: 'Happy customer stories',
-          reviews: [
-            {
-              text: 'Booked a day trip with Asgeir and Ola and landed my biggest pike so far. Remote waters, calm pace, and great guidance all day.',
-              author: 'Daniel M., Stockholm'
-            },
-            {
-              text: 'The private trip felt fully tailored to our group. We caught perch consistently and learned techniques we now use back home.',
-              author: 'Emma & Lucas, Uppsala'
-            },
-            {
-              text: 'Everything was ready when we arrived: boat, gear, and plan for the day. Professional hosts, beautiful waters, and fishing we will repeat.',
-              author: 'Johan R., Tromso'
-            }
-          ]
-        },
+
         gallery: [
           { title: 'The Waters', desc: 'Remote lakes and fjords across Northern Norway and northern Sweden. Untouched waters where predator fish thrive in silence, waiting for the right angler.' },
           { title: 'The Catch', desc: 'Pike and perch in waters that few have ever fished. Every cast is a chance at something extraordinary \u2014 trophy fish in pristine wilderness.' },
@@ -2201,23 +2033,7 @@
             tagline: 'Flerdagspaket för varje säsong'
           }
         },
-        socialProof: {
-          ariaLabel: 'Kunders upplevelser',
-          reviews: [
-            {
-              text: 'Vi bokade en dagstur med Asgeir och Ola och fick var livs storsta gadda. Avlagsna vatten, lugnt tempo och mycket bra guidning hela dagen.',
-              author: 'Daniel M., Stockholm'
-            },
-            {
-              text: 'Privatturen kandes helt anpassad till vart sallskap. Vi fick stadig abborrfiskning och larde oss metoder vi anvander hemma.',
-              author: 'Emma & Lucas, Uppsala'
-            },
-            {
-              text: 'Allt var klart nar vi kom fram: bat, utrustning och plan for dagen. Proffsiga vardar, vacker natur och fiske vi gor om.',
-              author: 'Johan R., Tromso'
-            }
-          ]
-        },
+
         gallery: [
           { title: 'Vattnen', desc: 'Avlägsna sjöar och fjordar i norra Norge och norra Sverige. Orörda vatten där rovfisken frodas i tystnad och väntar på rätt sportfiskare.' },
           { title: 'Fångsten', desc: 'Gädda och abborre i vatten där få har fiskat. Varje kast är en chans till något extraordinärt \u2014 troféfisk i orörd vildmark.' },
@@ -2302,20 +2118,7 @@
       if (sm) sm.textContent = tp.seeMore;
     }
 
-    function updateSocialProofCopy(langData) {
-      if (!langData.socialProof || !langData.socialProof.reviews) return;
-      if (socialProofRowEl && langData.socialProof.ariaLabel) {
-        socialProofRowEl.setAttribute('aria-label', langData.socialProof.ariaLabel);
-      }
-      langData.socialProof.reviews.forEach(function (review, index) {
-        var textEl = socialProofTextEls[index];
-        var authorEl = socialProofAuthorEls[index];
-        if (textEl) textEl.textContent = review.text;
-        if (authorEl) authorEl.textContent = '— ' + review.author;
-      });
-      // Re-init marquees after text change
-      if (typeof initMarquees === 'function') initMarquees();
-    }
+
 
     function applyLanguage(lang) {
       if (isAnimating || !translations[lang] || lang === currentLang) return;
@@ -2338,7 +2141,7 @@
       updateActiveHeroCopy(langData);
       updateGalleryCopy(langData);
       updateTilePageCopy(langData);
-      updateSocialProofCopy(langData);
+
 
       langButtons.forEach(btn => {
         const selected = btn.dataset.lang === lang;
@@ -2537,40 +2340,6 @@
           nudgeFired = true;
         });
       });
-    })();
-
-    /* Social Proof Marquee Init */
-    (function () {
-      var SPEED = 28; // pixels per second
-
-      window.initMarquees = function () {
-        document.querySelectorAll('.social-proof-card').forEach(function (card) {
-          var inner = card.querySelector('.marquee-inner');
-          if (!inner) return;
-
-          // Remove any previous clone
-          var clone = inner.querySelector('.marquee-clone');
-          if (clone) clone.remove();
-
-          // Duplicate the content for seamless loop
-          var contentClone = inner.cloneNode(true);
-          contentClone.classList.add('marquee-clone');
-          // We don't want nested animation on clone wrapper, flatten it
-          var fragment = document.createDocumentFragment();
-          while (contentClone.firstChild) {
-            fragment.appendChild(contentClone.firstChild);
-          }
-          inner.appendChild(fragment);
-
-          // Calculate duration based on content width
-          var contentWidth = inner.scrollWidth / 2;
-          var duration = contentWidth / SPEED;
-          inner.style.setProperty('--marquee-duration', duration + 's');
-        });
-      };
-
-      // Init on load
-      window.initMarquees();
     })();
   </script>
 
