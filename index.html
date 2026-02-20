@@ -204,7 +204,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-sm);
+      gap: 0.4rem;
       max-width: 760px;
       transition: opacity 0.4s ease, transform 0.4s ease;
     }
@@ -305,20 +305,21 @@
 
     .kinetic-title {
       width: min(100%, 800px);
-      min-height: clamp(100px, 16vw, 170px);
+      min-height: clamp(100px, 15vw, 145px);
       display: flex;
       align-items: flex-end;
       justify-content: center;
     }
 
+    /* Keep height consistent in tour mode */
     .kinetic-title.tour-title {
-      min-height: auto;
+      min-height: clamp(100px, 15vw, 145px);
     }
 
     .arched-title-svg {
       display: block;
       width: min(100%, 780px);
-      height: clamp(120px, 18vw, 190px);
+      height: clamp(100px, 15vw, 145px);
       overflow: visible;
     }
 
@@ -448,7 +449,10 @@
     /* About / Inline content area */
     .content-area {
       position: relative;
-      min-height: 80px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       max-width: 540px;
       width: 100%;
       padding: 0 var(--space-lg);
@@ -486,6 +490,9 @@
       opacity: 1;
       filter: blur(0);
       position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .content-slide.hidden {
@@ -561,14 +568,14 @@
        ============================================ */
     .services-row {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
       justify-content: center;
       align-items: flex-start;
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 1s ease forwards;
       animation-delay: 2s;
-      margin-top: var(--space-md);
+      margin-top: 1.25rem;
     }
 
     .service-item {
@@ -806,7 +813,7 @@
     .cta-row {
       display: flex;
       gap: 1.1rem;
-      margin-top: var(--space-sm);
+      margin-top: 0.75rem;
       justify-content: center;
       align-items: center;
       opacity: 0;
@@ -1351,8 +1358,11 @@
       }
 
       .content-area {
-        min-height: 74px;
+        height: 220px;
         padding: 0 var(--space-md);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       .content-slide {
@@ -1503,6 +1513,14 @@
       .landing-content {
         padding: var(--space-md);
         gap: var(--space-2xs);
+      }
+
+      .content-area {
+        padding: 0 var(--space-sm);
+        height: 260px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
 
       h1 {
