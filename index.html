@@ -214,8 +214,11 @@
       fill: #fff;
     }
     .tagline {
-      font-size: clamp(0.75rem, 1.3vw, 0.88rem);
+      font-size: clamp(0.9rem, 1.8vw, 1.15rem);
       color: var(--warm-rope); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
+    }
+    .tagline.tour-tagline {
+      font-size: clamp(0.75rem, 1.3vw, 0.88rem);
     }
     .kinetic-title .word, .tagline .word {
       display: inline-block; opacity: 0; transform: translateY(25px); filter: blur(8px);
@@ -868,9 +871,9 @@
 
     <div class="landing-content">
       <h1 class="kinetic-title" aria-label="Lakeside Predatorfishing">
-        <svg class="arched-title-svg" viewBox="0 0 840 280" role="presentation" aria-hidden="true">
+        <svg class="arched-title-svg" viewBox="-30 0 900 280" role="presentation" aria-hidden="true">
           <defs>
-            <path id="main-title-arc" d="M 18 245 Q 420 30 822 245"></path>
+            <path id="main-title-arc" d="M 0 250 Q 420 20 840 250"></path>
           </defs>
           <text class="arched-title-text">
             <textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">Lakeside Predatorfishing</textPath>
@@ -968,7 +971,7 @@
     <div style="position:absolute;inset:0;background:#0a1015;"></div>
     <div class="tile-header">
       <h2 class="tile-title" id="tile-title">From the Water</h2>
-      <p class="tile-subtitle" id="tile-subtitle">Every trip tells a story — here's a glimpse of ours</p>
+      <p class="tile-subtitle" id="tile-subtitle">Every trip tells a story, here's a glimpse of ours</p>
     </div>
     <div class="tile-social-row">
       <a href="https://www.facebook.com/profile.php?id=61583286603820" target="_blank" rel="noopener noreferrer" class="tile-social-link" aria-label="Follow us on Facebook">
@@ -1146,7 +1149,7 @@
         ],
         tilePage: {
           title: 'From the Water',
-          subtitle: 'Every trip tells a story \u2014 here\u2019s a glimpse of ours',
+          subtitle: 'Every trip tells a story, here\u2019s a glimpse of ours',
           seeMore: 'See More',
           facebook: 'Follow us on Facebook',
           whatsapp: 'Message us on WhatsApp'
@@ -1196,7 +1199,7 @@
         ],
         tilePage: {
           title: 'Fr\u00e5n vattnet',
-          subtitle: 'Varje tur ber\u00e4ttar en historia \u2014 h\u00e4r \u00e4r en glimt av v\u00e5r',
+          subtitle: 'Varje tur ber\u00e4ttar en historia, h\u00e4r \u00e4r en glimt av v\u00e5r',
           seeMore: 'Se mer',
           facebook: 'F\u00f6lj oss p\u00e5 Facebook',
           whatsapp: 'Skriv till oss p\u00e5 WhatsApp'
@@ -1303,7 +1306,7 @@
     }
 
     function buildArchedTitle() {
-      return '<svg class="arched-title-svg" viewBox="0 0 840 280" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 18 245 Q 420 30 822 245"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">Lakeside Predatorfishing</textPath></text></svg>';
+      return '<svg class="arched-title-svg" viewBox="-30 0 900 280" role="presentation" aria-hidden="true"><defs><path id="main-title-arc" d="M 0 250 Q 420 20 840 250"></path></defs><text class="arched-title-text"><textPath href="#main-title-arc" startOffset="50%" text-anchor="middle">Lakeside Predatorfishing</textPath></text></svg>';
     }
 
     function buildWords(text) {
@@ -1342,7 +1345,10 @@
       taglineEl.setAttribute('aria-label', taglineText);
 
       // Toggle tour-title class for smaller tour titles
-      setTimeout(function() { titleEl.classList.toggle('tour-title', isTour); }, 300);
+      setTimeout(function() {
+        titleEl.classList.toggle('tour-title', isTour);
+        taglineEl.classList.toggle('tour-tagline', isTour);
+      }, 300);
 
       // Slide title & tagline
       slideSwapElement(titleEl, titleText);
