@@ -1302,7 +1302,7 @@
       }
 
       .bottom-bar {
-        padding: 1.1rem 1.8rem;
+        padding: 1.1rem 1.8rem 1.6rem;
       }
 
       .gallery-content h2 {
@@ -1427,19 +1427,49 @@
 
       .bottom-bar {
         flex-direction: column;
-        gap: 0.45rem;
+        gap: 0.6rem;
         text-align: center;
-        padding: 1rem 1.5rem;
+        padding: 0.9rem 1.5rem 2rem;
+        background: rgba(31, 58, 68, 0.6);
       }
 
       .bottom-bar .contact-info {
-        flex-direction: column;
-        gap: 0.5rem;
-        font-size: 0.72rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.4rem;
+        font-size: 0.75rem;
+      }
+
+      .bottom-bar .contact-info span,
+      .bottom-bar .contact-info a {
+        padding: 0.2rem 0;
+      }
+
+      .bottom-bar .contact-info a {
+        position: relative;
+      }
+
+      .bottom-bar .contact-info a::before {
+        content: '';
+        position: absolute;
+        left: -0.7rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: rgba(200, 169, 106, 0.45);
       }
 
       .bottom-bar .copyright {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
+        opacity: 0.6;
+        padding-top: 0.15rem;
+        border-top: 1px solid rgba(242, 245, 244, 0.06);
+        margin-top: 0.1rem;
+        padding-top: 0.5rem;
+        width: 100%;
       }
 
       .aurora-overlay {
@@ -1486,7 +1516,7 @@
       }
 
       .page-dots {
-        bottom: 0.8rem;
+        bottom: 0.55rem;
         gap: 0.4rem;
       }
 
@@ -1553,6 +1583,24 @@
       .service-item .icon svg {
         width: 18px;
         height: 18px;
+      }
+
+      .bottom-bar {
+        padding: 0.8rem 1.2rem 1.8rem;
+      }
+
+      .bottom-bar .contact-info {
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.7rem;
+      }
+
+      .bottom-bar .contact-info a::before {
+        display: none;
+      }
+
+      .bottom-bar .copyright {
+        font-size: 0.58rem;
       }
     }
 
