@@ -216,9 +216,11 @@
     .tagline {
       font-size: clamp(0.9rem, 1.8vw, 1.15rem);
       color: var(--warm-rope); letter-spacing: 0.2em; text-transform: uppercase; font-weight: 400;
+      order: -1;
     }
     .tagline.tour-tagline {
       font-size: clamp(0.75rem, 1.3vw, 0.88rem);
+      order: 0;
     }
     .kinetic-title .word, .tagline .word {
       display: inline-block; opacity: 0; transform: translateY(25px); filter: blur(8px);
