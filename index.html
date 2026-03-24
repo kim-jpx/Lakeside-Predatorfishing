@@ -7,10 +7,87 @@
   <title>Lakeside Predatorfishing — Lake Fishing in Norway</title>
   <meta name="description"
     content="Pike and perch fishing in Northern Norway &amp; northern Sweden. Predator fishing in waters that few or no one has fished in before. Contact Asgeir &amp; Ola.">
+
+  <!-- SEO -->
+  <link rel="canonical" href="https://lakesidepredatorfishing.com/">
+  <meta name="theme-color" content="#1F3A44">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lakesidepredatorfishing.com/">
+  <meta property="og:title" content="Lakeside Predatorfishing — Lake Fishing in Norway">
+  <meta property="og:description" content="Pike and perch fishing in Northern Norway &amp; northern Sweden. Predator fishing in waters that few or no one has fished in before.">
+  <meta property="og:image" content="https://lakesidepredatorfishing.com/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="sv_SE">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;500;600&family=Teko:wght@400;500&display=swap"
     rel="stylesheet">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Lakeside Predatorfishing",
+    "description": "Guided predator fishing trips on pristine lakes in Karasjok, Northern Norway.",
+    "url": "https://lakesidepredatorfishing.com",
+    "telephone": "+46-76-897-94-72",
+    "email": "info@lakesidepredatorfishing.no",
+    "image": "https://lakesidepredatorfishing.com/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Karasjok",
+      "addressRegion": "Troms og Finnmark",
+      "postalCode": "9730",
+      "addressCountry": "NO"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 69.4697,
+      "longitude": 25.5136
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Fishing Trips",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Day Trip",
+            "description": "Full-day guided fishing trip with boat, gear, and local guide support."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Private Trip",
+            "description": "Exclusive private guided fishing experience for your group."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Seasonal Trip",
+            "description": "Multi-day seasonal fishing packages designed around seasonal fish behavior."
+          }
+        }
+      ]
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61583286603820"
+    ]
+  }
+  </script>
+
   <style>
     :root {
       --fjord-blue: #1F3A44;
@@ -2274,6 +2351,10 @@
       document.documentElement.lang = langData.htmlLang;
       if (pageTitleEl) pageTitleEl.textContent = langData.pageTitle;
       if (metaDescriptionEl) metaDescriptionEl.setAttribute('content', langData.description);
+      var ogTitle = document.querySelector('meta[property="og:title"]');
+      var ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogTitle) ogTitle.setAttribute('content', langData.pageTitle);
+      if (ogDesc) ogDesc.setAttribute('content', langData.description);
       if (skipBtn) skipBtn.textContent = langData.skipLabel;
       if (languageSwitcherEl) languageSwitcherEl.setAttribute('aria-label', langData.languageSelectorAria);
       if (topCompanyNameEl) topCompanyNameEl.setAttribute('aria-label', langData.backToMainAria);
