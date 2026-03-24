@@ -35,7 +35,12 @@
       "Bash(python -m json.tool)",
       "Bash(find /c/git/lakeside/Lakeside-Predatorfishing -maxdepth 1 -type f -exec ls -lh {})",
       "Bash(grep -E '\\\\.\\(png|jpg|jpeg|gif|webp|mp4|webm|md\\)$|^\\\\.claude|^\\\\.playwright|^docs')",
-      "Bash(ls -lhS c:/git/lakeside/Lakeside-Predatorfishing/*.png c:/git/lakeside/Lakeside-Predatorfishing/*.jpg c:/git/lakeside/Lakeside-Predatorfishing/*.gif c:/git/lakeside/Lakeside-Predatorfishing/*.mp4 c:/git/lakeside/Lakeside-Predatorfishing/*.webm c:/git/lakeside/Lakeside-Predatorfishing/*.webp)"
+      "Bash(ls -lhS c:/git/lakeside/Lakeside-Predatorfishing/*.png c:/git/lakeside/Lakeside-Predatorfishing/*.jpg c:/git/lakeside/Lakeside-Predatorfishing/*.gif c:/git/lakeside/Lakeside-Predatorfishing/*.mp4 c:/git/lakeside/Lakeside-Predatorfishing/*.webm c:/git/lakeside/Lakeside-Predatorfishing/*.webp)",
+      "Bash(rm -f mobile-gallery-check.png mobile-gallery-full.png mobile-gallery-v2.png mobile-gallery-v3.png mobile-landing-sv.png landscape-landing.png landscape-gallery.png landscape-landing-v2.png landscape-gallery-v2.png portrait-landing-final.png desktop-final.png mobile-gallery-fixed.png)",
+      "Bash(rm -rf .playwright-mcp/)",
+      "Bash(rm -f intro-playing.png after-intro-fade.png)",
+      "Bash(rm -f verify-intro.png verify-after-fade.png verify-mobile.png verify-landscape.png)",
+      "Bash(rm -f gallery-bg-desktop.png gallery-bg-mobile.png)"
     ]
   }
 }
