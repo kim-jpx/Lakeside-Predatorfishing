@@ -10,6 +10,9 @@
 
   <!-- SEO -->
   <link rel="canonical" href="https://lakesidepredatorfishing.com/">
+  <link rel="alternate" hreflang="en" href="https://lakesidepredatorfishing.com/">
+  <link rel="alternate" hreflang="sv" href="https://lakesidepredatorfishing.com/">
+  <link rel="alternate" hreflang="x-default" href="https://lakesidepredatorfishing.com/">
   <meta name="theme-color" content="#1F3A44">
 
   <!-- Open Graph -->
@@ -20,11 +23,16 @@
   <meta property="og:image" content="https://lakesidepredatorfishing.com/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Fishing guide holding a pike on a Norwegian lake at golden hour">
   <meta property="og:locale" content="en_US">
   <meta property="og:locale:alternate" content="sv_SE">
 
   <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lakeside Predatorfishing — Lake Fishing in Norway">
+  <meta name="twitter:description" content="Pike and perch fishing in Northern Norway &amp; northern Sweden. Explore remote waters where few have ever cast a line — Asgeir &amp; Ola.">
+  <meta name="twitter:image" content="https://lakesidepredatorfishing.com/og-image.jpg">
+  <meta name="twitter:image:alt" content="Fishing guide holding a pike on a Norwegian lake at golden hour">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1982,7 +1990,7 @@
 
   <!-- INTRO -->
   <div id="intro-overlay">
-    <video id="intro-video" autoplay muted playsinline preload="auto" poster="intro-poster.png"
+    <video id="intro-video" autoplay muted playsinline preload="metadata" poster="intro-poster.png"
       aria-label="Predator fishing intro">
       <source src="intro.webm" type="video/webm">
       <source src="intro.mp4" type="video/mp4">
@@ -2524,6 +2532,10 @@
       var ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogTitle) ogTitle.setAttribute('content', langData.pageTitle);
       if (ogDesc) ogDesc.setAttribute('content', langData.description);
+      var twTitle = document.querySelector('meta[name="twitter:title"]');
+      var twDesc = document.querySelector('meta[name="twitter:description"]');
+      if (twTitle) twTitle.setAttribute('content', langData.pageTitle);
+      if (twDesc) twDesc.setAttribute('content', langData.description);
       if (skipBtn) skipBtn.textContent = langData.skipLabel;
       if (languageSwitcherEl) languageSwitcherEl.setAttribute('aria-label', langData.languageSelectorAria);
       if (topCompanyNameEl) topCompanyNameEl.setAttribute('aria-label', langData.backToMainAria);
