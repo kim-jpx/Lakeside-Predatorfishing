@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find ~/.claude -name *mcp* -o -name *server* -o -name *hook*)",
+      "Bash(env)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "WebSearch",
+      "Bash(ls -lh *.jpg *.png)",
+      "Read(//c/git/lakeside/Lakeside-Predatorfishing/**)",
+      "WebFetch(domain:www.w3.org)",
+      "WebFetch(domain:web.dev)",
+      "WebFetch(domain:developers.google.com)",
+      "WebFetch(domain:caniuse.com)",
+      "WebFetch(domain:thelinuxcode.com)",
+      "WebFetch(domain:css-tricks.com)",
+      "WebFetch(domain:ogp.me)",
+      "WebFetch(domain:developer.x.com)",
+      "WebFetch(domain:schema.org)",
+      "WebFetch(domain:una.im)",
+      "WebFetch(domain:www.smashingmagazine.com)",
+      "WebFetch(domain:designsystem.digital.gov)",
+      "WebFetch(domain:evilmartians.com)",
+      "WebFetch(domain:www.nickpaolini.com)",
+      "WebFetch(domain:developer.chrome.com)",
+      "WebFetch(domain:blog.pope.tech)",
+      "Bash(powershell -command \":*)",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8765/)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_click",
+      "mcp__plugin_playwright_playwright__browser_snapshot",
+      "mcp__plugin_playwright_playwright__browser_console_messages",
+      "Bash(python -m json.tool)",
+      "Bash(find /c/git/lakeside/Lakeside-Predatorfishing -maxdepth 1 -type f -exec ls -lh {})",
+      "Bash(grep -E '\\\\.\\(png|jpg|jpeg|gif|webp|mp4|webm|md\\)$|^\\\\.claude|^\\\\.playwright|^docs')",
+      "Bash(ls -lhS c:/git/lakeside/Lakeside-Predatorfishing/*.png c:/git/lakeside/Lakeside-Predatorfishing/*.jpg c:/git/lakeside/Lakeside-Predatorfishing/*.gif c:/git/lakeside/Lakeside-Predatorfishing/*.mp4 c:/git/lakeside/Lakeside-Predatorfishing/*.webm c:/git/lakeside/Lakeside-Predatorfishing/*.webp)"
+    ]
+  }
+}
